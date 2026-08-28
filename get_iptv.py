@@ -3,14 +3,11 @@ import pandas as pd
 import re
 import os
 
-# 源地址列表，已加入咪咕CCTV公开源，全部使用gh‑proxy代理，适配github action环境
+# 源地址列表
 urls = [
     "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt",
-    # 新增咪咕CCTV上游源（代理加速版本）
-    "https://gh-proxy.com/https://raw.githubusercontent.com/guoganghui/opencctv/main/%E5%92%AA%E5%92%95%E7%9B%B4%E6%92%AD.txt",
-    "https://cdn.jsdelivr.net/gh/hst1189/iptv@main/20_咪咕直播.m3u",
 ]
 
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
@@ -23,15 +20,9 @@ ban_words = [
 ]
 
 def get_channel_group(name: str) -> str:
-    """根据频道名判断分组【新增咪咕、CCTV独立分组】"""
+    """根据频道名判断分组"""
     if not name:
         return "其他频道"
-
-    # ==========新增：咪咕频道优先匹配==========
-    migu_keywords = ["咪咕", "MIGU"]
-    for k in migu_keywords:
-        if k in name:
-            return "咪咕频道"
 
     # 少儿频道优先匹配
     kid_keywords = ["少儿", "动画", "卡通", "金鹰卡通", "卡酷少儿", "优漫卡通"]
@@ -39,11 +30,8 @@ def get_channel_group(name: str) -> str:
         if k in name:
             return "少儿频道"
 
-    # ==========新增：纯CCTV编号单独分到CCTV频道==========
-    if re.match(r'^CCTV[-‑]?\d+', name.upper()):
-        return "CCTV频道"
-    # 其余带“央视”字样但不是CCTV数字编号的留在央视频道
-    if "央视" in name:
+    # 央视频道
+    if re.match(r'^CCTV[-‑]?\d+', name.upper()) or "央视" in name:
         return "央视频道"
 
     # 卫视频道
@@ -154,8 +142,8 @@ def save_to_total_txt(df, filename="iptv.txt"):
     print(f"总文本文件已保存: {os.path.abspath(filename)}")
 
 def save_split_txt(df):
-    """按分组输出独立txt文件，每个文件内部分IPv4/IPv6【增加咪咕频道、CCTV频道】"""
-    group_list = ["CCTV频道", "咪咕频道", "央视频道", "卫视频道", "少儿频道", "地方频道", "其他频道"]
+    """按分组输出独立txt文件，每个文件内部分IPv4/IPv6"""
+    group_list = ["央视频道", "卫视频道", "少儿频道", "地方频道", "其他频道"]
     for g_name in group_list:
         sub_df = df[df["group"] == g_name]
         if sub_df.empty:
