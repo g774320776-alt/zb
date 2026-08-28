@@ -1,84 +1,71 @@
 name: Update
 
+# 触发规则
 on:
   schedule:
-    - cron: 0,30 * * * *
-  workflow_dispatch:
+    - cron: 0 21 * * *   # UTC时间21点 → 北京时间05:00执行
+  workflow_dispatch:     # 支持网页手动点击运行
 
 permissions:
-  contents: write
+  contents: write        # 授予仓库读写权限，允许git push提交
 
 env:
-  TZ: Asia/Shanghai
+  TZ: Asia/Shanghai      # 环境时区设为上海
 
 jobs:
   Update:
     runs-on: ubuntu-latest
+    timeout-minutes: 20  # 任务最大超时20分钟
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      # 1.拉取仓库代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Get time
-      run: echo "DATE=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+      # 2.获取北京时间存入环境变量 DATE
+      - name: Get current Beijing time
+        run: echo "DATE=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.x'
+      # 3.安装Python3环境
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pandas requests
+      # 4.安装python依赖 pandas requests
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas requests
 
-    - name: Run script
-      run: |
-        python get_iptv.py
-        
-    - name: Update time
-      run: |
-        echo "## ✨于 $DATE 更新
-        **🎉自用IPTV源**
-        
-        https://ghfast.top/raw.githubusercontent.com/TianmuTNT/iptv/main/iptv.txt
-        
-        https://ghfast.top/raw.githubusercontent.com/TianmuTNT/iptv/main/iptv.m3u
-        
-        ## ☁️ 国内高性能服务器推荐 Rainyun 雨云
-        ### 🌟 [点击这里前往](https://www.rainyun.com/skymc_) 可获得5折优惠！
-        **🚀 为什么选择雨云？**
-        
-        性能不虚标：实际测试中 CPU 性能稳定，内存 IO 表现出色，比肩海外同价 VPS；
-        
-        价格实在：起步价极低（常有促销），且配置灵活，可根据需求弹性升级；
-        
-        中文面板友好：无需折腾系统配置，新手也能轻松管理服务器；
-        
-        节点丰富：提供多地线路，包括电信、移动、联通直连，适合延迟敏感型服务如 Minecraft；
-        
-        适合长期稳定运行：Minecraft 服务器、网页服务、机器人宿主环境等都表现良好。" > README.md
+      # 5.运行iptv生成脚本，输出iptv.txt、iptv.m3u
+      - name: Run iptv generate script
+        run: python get_iptv.py
 
-    - name: List files in workspace
-      run: ls -la
+      # 6.覆盖生成README.md，仅写入更新时间
+      - name: Generate README.md
+        run: |
+          echo "## 更新于 $DATE" > README.md
 
-    - name: Git status
-      run: git status
+      # 7.配置git机器人提交身份
+      - name: Configure Git bot identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-    - name: Configure Git
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      # 8.提交文件推送到main分支；--allow-empty允许无文件改动也生成提交记录
+      - name: Commit & push files
+        run: |
+          git add iptv.txt iptv.m3u README.md
+          git commit -m "Update on ${{ env.DATE }}" --allow-empty
+          git push origin main
 
-    - name: Commit and Push changes
-      run: |
-        git add $(pwd)/iptv.txt
-        git add $(pwd)/iptv.m3u
-        git add $(pwd)/README.md
-        git commit -m "Update on $DATE" --allow-empty
-        git push origin main
-    - name: Upload streams file
-      uses: actions/upload-artifact@v4
-      with:
-        name: iptv
-        path: iptv.txt
+      # 9.上传产物，Action页面可下载iptv.txt、iptv.m3u
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: iptv-output
+          path: |
+            iptv.txt
+            iptv.m3u
+
