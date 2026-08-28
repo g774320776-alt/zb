@@ -3,6 +3,7 @@ import pandas as pd
 import re
 import os
 
+# 源地址列表
 urls = [
     "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://live.zbds.top/tv/iptv6.txt",
@@ -12,37 +13,63 @@ urls = [
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
 ipv6_pattern = re.compile(r'^http://\[([a-fA-F0-9:]+)\]')
 
-def fetch_streams_from_url(url):
+# 广告/垃圾关键词过滤，包含这些词的节目直接丢弃
+ban_words = [
+    "广告", "购物", "测试", "垃圾", "备用源", "vip", "付费",
+    "游戏", "棋牌", "成人", "解密", "高清备用", "直播源分享"
+]
+
+def clean_program_name(name: str) -> str:
+    """清洗节目名称：去除多余符号、空格、后缀"""
+    if not name:
+        return ""
+    # 去除各种特殊符号、多余标记
+    name = re.sub(r'[★✨🔴💥🔥⚡]', '', name)
+    name = re.sub(r'\s+', ' ', name)
+    name = re.sub(r'((高清)|(超清)|(标清)|(HD)|(SD)|(4K)|(2K)|‑\d+)$', '', name)
+    name = name.strip()
+    return name
+
+def is_bad_name(name: str) -> bool:
+    """判断是否垃圾节目"""
+    name_low = name.lower()
+    for w in ban_words:
+        if w in name_low:
+            return True
+    return False
+
+def fetch_streams_from_url(url, retries=2):
     print(f"正在爬取网站源: {url}")
-    try:
-        response = requests.get(url, timeout=10)
-        response.encoding = 'utf-8'
-        if response.status_code == 200:
-            return response.text
-        print(f"从 {url} 获取数据失败，状态码: {response.status_code}")
-    except requests.exceptions.RequestException as e:
-        print(f"请求 {url} 时发生错误: {e}")
+    for attempt in range(retries):
+        try:
+            response = requests.get(url, timeout=12)
+            response.encoding = 'utf-8'
+            if response.status_code == 200:
+                return response.text
+            print(f"第{attempt+1}次请求 {url} 状态码:{response.status_code}")
+        except requests.exceptions.RequestException as e:
+            print(f"请求 {url} 异常: {e}")
+    print(f"跳过来源: {url}")
     return None
 
 def fetch_all_streams():
     all_streams = []
     for url in urls:
-        if content := fetch_streams_from_url(url):
+        content = fetch_streams_from_url(url)
+        if content:
             all_streams.append(content)
-        else:
-            print(f"跳过来源: {url}")
     return "\n".join(all_streams)
 
 def parse_m3u(content):
     streams = []
     current_program = None
-    
     for line in content.splitlines():
         if line.startswith("#EXTINF"):
-            if match := re.search(r'tvg-name="([^"]+)"', line):
-                current_program = match.group(1).strip()
+            match = re.search(r'tvg-name="([^"]+)"', line)
+            if match:
+                current_program = clean_program_name(match.group(1).strip())
         elif line.startswith("http"):
-            if current_program:
+            if current_program and not is_bad_name(current_program):
                 streams.append({"program_name": current_program, "stream_url": line.strip()})
                 current_program = None
     return streams
@@ -50,23 +77,31 @@ def parse_m3u(content):
 def parse_txt(content):
     streams = []
     for line in content.splitlines():
-        if match := re.match(r"(.+?),\s*(http.+)", line):
-            streams.append({
-                "program_name": match.group(1).strip(),
-                "stream_url": match.group(2).strip()
-            })
+        match = re.match(r"(.+?),\s*(http.+)", line)
+        if match:
+            p_name = clean_program_name(match.group(1).strip())
+            p_url = match.group(2).strip()
+            if p_name and p_url.startswith("http") and not is_bad_name(p_name):
+                streams.append({
+                    "program_name": p_name,
+                    "stream_url": p_url
+                })
     return streams
 
 def organize_streams(content):
     parser = parse_m3u if content.startswith("#EXTM3U") else parse_txt
-    df = pd.DataFrame(parser(content))
-    df = df.drop_duplicates(subset=['program_name', 'stream_url'])
+    raw = parser(content)
+    df = pd.DataFrame(raw)
+    if df.empty:
+        return df
+    # 强去重：节目名+链接双去重
+    df = df.drop_duplicates(subset=['program_name', 'stream_url'], keep="first")
+    df = df[df['program_name'].str.len() > 0]
     return df.groupby('program_name')['stream_url'].apply(list).reset_index()
 
 def save_to_txt(grouped_streams, filename="iptv.txt"):
     ipv4 = []
     ipv6 = []
-    
     for _, row in grouped_streams.iterrows():
         program = row['program_name']
         for url in row['stream_url']:
@@ -76,8 +111,10 @@ def save_to_txt(grouped_streams, filename="iptv.txt"):
                 ipv6.append(f"{program},{url}")
 
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write("# IPv4 Streams\n" + "\n".join(ipv4))
-        f.write("\n\n# IPv6 Streams\n" + "\n".join(ipv6))
+        f.write("# IPv4 Streams\n")
+        f.write("\n".join(ipv4))
+        f.write("\n\n# IPv6 Streams\n")
+        f.write("\n".join(ipv6))
     print(f"文本文件已保存: {os.path.abspath(filename)}")
 
 def save_to_m3u(grouped_streams, filename="iptv.m3u"):
@@ -91,10 +128,15 @@ def save_to_m3u(grouped_streams, filename="iptv.m3u"):
 
 if __name__ == "__main__":
     print("开始抓取所有源...")
-    if content := fetch_all_streams():
+    content = fetch_all_streams()
+    if content:
         print("整理源数据中...")
         organized = organize_streams(content)
-        save_to_txt(organized)
-        save_to_m3u(organized)
+        if not organized.empty:
+            save_to_txt(organized)
+            save_to_m3u(organized)
+            print(f"✅完成！共处理 {len(organized)} 个节目")
+        else:
+            print("❌没有解析到有效节目")
     else:
-        print("未能获取有效数据")
+        print("❌未能获取有效数据")
