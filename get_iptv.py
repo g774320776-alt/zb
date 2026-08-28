@@ -3,11 +3,19 @@ import pandas as pd
 import re
 import os
 
-# 源地址列表
+# 原有源 + 新增持续更新源 + 咪咕专用源
 urls = [
-    "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
-    "https://live.zbds.top/tv/iptv6.txt",
-    "https://live.zbds.top/tv/iptv4.txt",
+    "https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u",
+    "https://raw.githubusercontent.com/YueChan/Live/refs/heads/main/APTV.m3u",
+    "https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u",
+    "https://raw.githubusercontent.com/BurningC4/Chinese-IPTV/master/TV-IPV4.m3u",
+    "https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/IPV6.m3u",
+    "https://raw.githubusercontent.com/yuanzl77/IPTV/main/live.m3u",
+    "https://raw.githubusercontent.com/vbskycn/iptv/master/tv/iptv6.m3u",
+    "https://raw.githubusercontent.com/best-fan/iptv-sources/main/cn_all.m3u8",
+    "https://iptv-org.github.io/iptv/countries/cn.m3u",
+    # 咪咕独立更新源
+    "https://raw.githubusercontent.com/YanG-1989/m3u/main/Migu.m3u"
 ]
 
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
@@ -20,11 +28,15 @@ ban_words = [
 ]
 
 def get_channel_group(name: str) -> str:
-    """根据频道名判断分组"""
+    """分组规则：咪咕优先，再少儿、央视、卫视、地方、其他"""
     if not name:
         return "其他频道"
 
-    # 少儿频道优先匹配
+    # 咪咕直播分组 优先匹配
+    if "咪咕" in name:
+        return "咪咕直播"
+
+    # 少儿频道
     kid_keywords = ["少儿", "动画", "卡通", "金鹰卡通", "卡酷少儿", "优漫卡通"]
     for k in kid_keywords:
         if k in name:
@@ -38,69 +50,70 @@ def get_channel_group(name: str) -> str:
     if "卫视" in name:
         return "卫视频道"
 
-    # 地方台
+    # 地方频道
     return "地方频道"
 
 def clean_program_name(name: str) -> str:
-    """清洗节目名称：去除多余符号、空格、后缀"""
+    """清洗节目名称：去除特殊符号、多余空格"""
     if not name:
         return ""
-    name = re.sub(r'[★✨🔴💥🔥⚡]', '', name)
-    name = re.sub(r'\s+', ' ', name)
-    name = re.sub(r'((高清)|(超清)|(标清)|(HD)|(SD)|(4K)|(2K)|‑\d+)$', '', name, flags=re.IGNORECASE)
-    name = name.strip()
+    name = re.sub(r'[★✨🔴💥●◆■]', '', name)
+    name = re.sub(r'\s+', ' ', name).strip()
     return name
 
-def is_bad_name(name: str) -> bool:
-    """判断是否垃圾节目"""
-    name_low = name.lower()
-    for w in ban_words:
-        if w in name_low:
-            return True
-    return False
-
-def fetch_streams_from_url(url, retries=2):
-    print(f"正在爬取网站源: {url}")
-    for attempt in range(retries):
-        try:
-            response = requests.get(url, timeout=12)
-            response.encoding = 'utf-8'
-            if response.status_code == 200:
-                return response.text
-            print(f"第{attempt+1}次请求 {url} 状态码:{response.status_code}")
-        except requests.exceptions.RequestException as e:
-            print(f"请求 {url} 异常: {e}")
-    print(f"跳过来源: {url}")
-    return None
-
-def fetch_all_streams():
-    all_streams = []
-    for url in urls:
-        content = fetch_streams_from_url(url)
-        if content:
-            all_streams.append(content)
-    return "\n".join(all_streams)
+def fetch_m3u(url):
+    try:
+        resp = requests.get(url, timeout=15)
+        resp.raise_for_status()
+        return resp.text
+    except Exception as e:
+        print(f"获取失败 {url}: {e}")
+        return ""
 
 def parse_m3u(content):
-    streams = []
-    current_program = None
-    for line in content.splitlines():
+    channels = []
+    lines = content.splitlines()
+    name = ""
+    for line in lines:
+        line = line.strip()
         if line.startswith("#EXTINF"):
-            match = re.search(r'tvg-name="([^"]+)"', line)
+            match = re.search(r',(.+)$', line)
             if match:
-                current_program = clean_program_name(match.group(1).strip())
-        elif line.startswith("http"):
-            if current_program and not is_bad_name(current_program):
-                streams.append({"program_name": current_program, "stream_url": line.strip()})
-                current_program = None
-    return streams
+                name = clean_program_name(match.group(1))
+        elif line.startswith("http") and name:
+            # 过滤违禁关键词
+            if any(b in name for b in ban_words):
+                name = ""
+                continue
+            group = get_channel_group(name)
+            channels.append({
+                "name": name,
+                "url": line,
+                "group": group
+            })
+            name = ""
+    return channels
 
-def parse_txt(content):
-    streams = []
-    for line in content.splitlines():
-        match = re.match(r"(.+?),\s*(http.+)", line)
-        if match:
-            p_name = clean_program_name(match.group(1).strip())
+def main():
+    all_channels = []
+    for u in urls:
+        print(f"正在处理: {u}")
+        txt = fetch_m3u(u)
+        chs = parse_m3u(txt)
+        all_channels.extend(chs)
+    # 名称+链接双重去重
+    df = pd.DataFrame(all_channels)
+    df = df.drop_duplicates(subset=["name", "url"])
+    # 按分组排序输出m3u
+    output = "#EXTM3U\n"
+    for _, row in df.iterrows():
+        output += f'#EXTINF:-1 group-title="{row["group"]}",{row["name"]}\n{row["url"]}\n'
+    with open("merged_iptv.m3u", "w", encoding="utf-8") as f:
+        f.write(output)
+    print("合并完成，已保存为 merged_iptv.m3u，咪咕频道已单独分组")
+
+if __name__ == "__main__":
+    main()
             p_url = match.group(2).strip()
             if p_name and p_url.startswith("http") and not is_bad_name(p_name):
                 streams.append({
