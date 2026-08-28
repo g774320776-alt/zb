@@ -38,7 +38,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas requests
 
-      # 5.运行iptv生成脚本，输出iptv.txt、iptv.m3u
+      # 5.运行iptv生成脚本，输出merged_iptv.m3u
       - name: Run iptv generate script
         run: python get_iptv.py
 
@@ -56,16 +56,14 @@ jobs:
       # 8.提交文件推送到main分支；--allow-empty允许无文件改动也生成提交记录
       - name: Commit & push files
         run: |
-          git add iptv.txt iptv.m3u README.md
+          git add merged_iptv.m3u README.md
           git commit -m "Update on ${{ env.DATE }}" --allow-empty
           git push origin main
 
-      # 9.上传产物，Action页面可下载iptv.txt、iptv.m3u
+      # 9.上传产物，Action页面可下载merged_iptv.m3u
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: iptv-output
           path: |
-            iptv.txt
-            iptv.m3u
-
+            merged_iptv.m3u
