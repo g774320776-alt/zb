@@ -3,11 +3,14 @@ import pandas as pd
 import re
 import os
 
-# 源地址列表
+# 源地址列表，已加入咪咕CCTV公开源，全部使用gh‑proxy代理，适配github action环境
 urls = [
     "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt",
+    # 新增咪咕CCTV上游源（代理加速版本）
+    "https://gh-proxy.com/https://raw.githubusercontent.com/guoganghui/opencctv/main/%E5%92%AA%E5%92%95%E7%9B%B4%E6%92%AD.txt",
+    "https://cdn.jsdelivr.net/gh/hst1189/iptv@main/20_咪咕直播.m3u",
 ]
 
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
