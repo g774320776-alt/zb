@@ -110,21 +110,20 @@ def parse_txt(content):
     return streams
 
 def organize_streams(content):
-    """修复：不groupby合并，原始每条流计算分组，保存group字段！！"""
     parser = parse_m3u if content.startswith("#EXTM3U") else parse_txt
     raw = parser(content)
     df = pd.DataFrame(raw)
     if df.empty:
         return df
-    # URL+频道名联合去重
+    # 联合去重
     df = df.drop_duplicates(subset=['program_name', 'stream_url'], keep="first")
     df = df[df['program_name'].str.len() > 0]
-    # 关键：每一行直接计算分组，新增group列
+    # 计算分组字段
     df['group'] = df['program_name'].apply(get_channel_group)
     return df
 
-def save_to_txt(df, filename="iptv.txt"):
-    """txt输出：依旧分开IPv4/IPv6，txt格式本身不支持分组"""
+def save_to_total_txt(df, filename="iptv.txt"):
+    """保存总txt文件，区分IPv4/IPv6"""
     ipv4 = []
     ipv6 = []
     for _, row in df.iterrows():
@@ -140,17 +139,38 @@ def save_to_txt(df, filename="iptv.txt"):
         f.write("\n".join(ipv4))
         f.write("\n\n# IPv6 Streams\n")
         f.write("\n".join(ipv6))
-    print(f"文本文件已保存: {os.path.abspath(filename)}")
+    print(f"总文本文件已保存: {os.path.abspath(filename)}")
+
+def save_split_txt(df):
+    """按分组输出独立txt文件，每个文件内部分IPv4/IPv6"""
+    group_list = ["央视频道", "卫视频道", "少儿频道", "地方频道", "其他频道"]
+    for g_name in group_list:
+        sub_df = df[df["group"] == g_name]
+        if sub_df.empty:
+            continue
+        ipv4 = []
+        ipv6 = []
+        for _, row in sub_df.iterrows():
+            line = f"{row['program_name']},{row['stream_url']}"
+            if ipv4_pattern.match(row['stream_url']):
+                ipv4.append(line)
+            elif ipv6_pattern.match(row['stream_url']):
+                ipv6.append(line)
+        filename = f"{g_name}.txt"
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write("# IPv4\n")
+            f.write("\n".join(ipv4))
+            f.write("\n\n# IPv6\n")
+            f.write("\n".join(ipv6))
+        print(f"分类文件已保存: {os.path.abspath(filename)}")
 
 def save_to_m3u(df, filename="iptv.m3u"):
-    """修复：直接读取df里预先计算好的group字段，每条流独立输出EXTINF"""
     with open(filename, 'w', encoding='utf-8') as f:
         f.write("#EXTM3U\n")
         for _, row in df.iterrows():
             program = row['program_name']
             group = row['group']
             url = row['stream_url']
-            # tvg-group 标准标签，大部分播放器识别
             f.write(f'#EXTINF:-1 tvg-name="{program}" group-title="{group}",{program}\n{url}\n')
     print(f"M3U文件已保存: {os.path.abspath(filename)}")
 
@@ -161,9 +181,10 @@ if __name__ == "__main__":
         print("整理源数据中...")
         df_result = organize_streams(content)
         if not df_result.empty:
-            save_to_txt(df_result)
+            save_to_total_txt(df_result)
+            save_split_txt(df_result)
             save_to_m3u(df_result)
-            print(f"✅完成！共处理 {len(df_result)} 条流")
+            print(f"\n✅全部完成！共 {len(df_result)} 条直播流")
         else:
             print("❌没有解析到有效节目")
     else:
