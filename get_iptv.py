@@ -13,17 +13,38 @@ urls = [
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
 ipv6_pattern = re.compile(r'^http://\[([a-fA-F0-9:]+)\]')
 
-# 广告/垃圾关键词过滤，包含这些词的节目直接丢弃
+# 广告/垃圾关键词过滤
 ban_words = [
     "广告", "购物", "测试", "垃圾", "备用源", "vip", "付费",
     "游戏", "棋牌", "成人", "解密", "高清备用", "直播源分享"
 ]
 
+def get_channel_group(name: str) -> str:
+    """根据频道名判断分组，新增少儿频道"""
+    name_upper = name.upper()
+    name_low = name.lower()
+
+    # 少儿频道优先匹配
+    kid_keywords = ["少儿", "动画", "卡通", "金鹰卡通", "卡酷少儿", "优漫卡通"]
+    for k in kid_keywords:
+        if k in name:
+            return "少儿频道"
+
+    # 央视频道
+    if re.match(r'^CCTV[-‑]?\d+', name_upper) or "央视" in name:
+        return "央视频道"
+
+    # 卫视频道
+    if "卫视" in name:
+        return "卫视频道"
+
+    # 地方台
+    return "地方频道"
+
 def clean_program_name(name: str) -> str:
     """清洗节目名称：去除多余符号、空格、后缀"""
     if not name:
         return ""
-    # 去除各种特殊符号、多余标记
     name = re.sub(r'[★✨🔴💥🔥⚡]', '', name)
     name = re.sub(r'\s+', ' ', name)
     name = re.sub(r'((高清)|(超清)|(标清)|(HD)|(SD)|(4K)|(2K)|‑\d+)$', '', name)
@@ -94,7 +115,6 @@ def organize_streams(content):
     df = pd.DataFrame(raw)
     if df.empty:
         return df
-    # 强去重：节目名+链接双去重
     df = df.drop_duplicates(subset=['program_name', 'stream_url'], keep="first")
     df = df[df['program_name'].str.len() > 0]
     return df.groupby('program_name')['stream_url'].apply(list).reset_index()
@@ -122,8 +142,9 @@ def save_to_m3u(grouped_streams, filename="iptv.m3u"):
         f.write("#EXTM3U\n")
         for _, row in grouped_streams.iterrows():
             program = row['program_name']
+            group = get_channel_group(program)
             for url in row['stream_url']:
-                f.write(f'#EXTINF:-1 tvg-name="{program}",{program}\n{url}\n')
+                f.write(f'#EXTINF:-1 tvg-name="{program}" tvg-group="{group}",{program}\n{url}\n')
     print(f"M3U文件已保存: {os.path.abspath(filename)}")
 
 if __name__ == "__main__":
