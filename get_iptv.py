@@ -20,9 +20,9 @@ ban_words = [
 ]
 
 def get_channel_group(name: str) -> str:
-    """根据频道名判断分组，新增少儿频道"""
-    name_upper = name.upper()
-    name_low = name.lower()
+    """根据频道名判断分组"""
+    if not name:
+        return "其他频道"
 
     # 少儿频道优先匹配
     kid_keywords = ["少儿", "动画", "卡通", "金鹰卡通", "卡酷少儿", "优漫卡通"]
@@ -31,7 +31,7 @@ def get_channel_group(name: str) -> str:
             return "少儿频道"
 
     # 央视频道
-    if re.match(r'^CCTV[-‑]?\d+', name_upper) or "央视" in name:
+    if re.match(r'^CCTV[-‑]?\d+', name.upper()) or "央视" in name:
         return "央视频道"
 
     # 卫视频道
@@ -47,7 +47,7 @@ def clean_program_name(name: str) -> str:
         return ""
     name = re.sub(r'[★✨🔴💥🔥⚡]', '', name)
     name = re.sub(r'\s+', ' ', name)
-    name = re.sub(r'((高清)|(超清)|(标清)|(HD)|(SD)|(4K)|(2K)|‑\d+)$', '', name)
+    name = re.sub(r'((高清)|(超清)|(标清)|(HD)|(SD)|(4K)|(2K)|‑\d+)$', '', name, flags=re.IGNORECASE)
     name = name.strip()
     return name
 
@@ -110,25 +110,30 @@ def parse_txt(content):
     return streams
 
 def organize_streams(content):
+    """修复：不groupby合并，原始每条流计算分组，保存group字段！！"""
     parser = parse_m3u if content.startswith("#EXTM3U") else parse_txt
     raw = parser(content)
     df = pd.DataFrame(raw)
     if df.empty:
         return df
+    # URL+频道名联合去重
     df = df.drop_duplicates(subset=['program_name', 'stream_url'], keep="first")
     df = df[df['program_name'].str.len() > 0]
-    return df.groupby('program_name')['stream_url'].apply(list).reset_index()
+    # 关键：每一行直接计算分组，新增group列
+    df['group'] = df['program_name'].apply(get_channel_group)
+    return df
 
-def save_to_txt(grouped_streams, filename="iptv.txt"):
+def save_to_txt(df, filename="iptv.txt"):
+    """txt输出：依旧分开IPv4/IPv6，txt格式本身不支持分组"""
     ipv4 = []
     ipv6 = []
-    for _, row in grouped_streams.iterrows():
+    for _, row in df.iterrows():
         program = row['program_name']
-        for url in row['stream_url']:
-            if ipv4_pattern.match(url):
-                ipv4.append(f"{program},{url}")
-            elif ipv6_pattern.match(url):
-                ipv6.append(f"{program},{url}")
+        url = row['stream_url']
+        if ipv4_pattern.match(url):
+            ipv4.append(f"{program},{url}")
+        elif ipv6_pattern.match(url):
+            ipv6.append(f"{program},{url}")
 
     with open(filename, 'w', encoding='utf-8') as f:
         f.write("# IPv4 Streams\n")
@@ -137,14 +142,16 @@ def save_to_txt(grouped_streams, filename="iptv.txt"):
         f.write("\n".join(ipv6))
     print(f"文本文件已保存: {os.path.abspath(filename)}")
 
-def save_to_m3u(grouped_streams, filename="iptv.m3u"):
+def save_to_m3u(df, filename="iptv.m3u"):
+    """修复：直接读取df里预先计算好的group字段，每条流独立输出EXTINF"""
     with open(filename, 'w', encoding='utf-8') as f:
         f.write("#EXTM3U\n")
-        for _, row in grouped_streams.iterrows():
+        for _, row in df.iterrows():
             program = row['program_name']
-            group = get_channel_group(program)
-            for url in row['stream_url']:
-                f.write(f'#EXTINF:-1 tvg-name="{program}" tvg-group="{group}",{program}\n{url}\n')
+            group = row['group']
+            url = row['stream_url']
+            # tvg-group 标准标签，大部分播放器识别
+            f.write(f'#EXTINF:-1 tvg-name="{program}" group-title="{group}",{program}\n{url}\n')
     print(f"M3U文件已保存: {os.path.abspath(filename)}")
 
 if __name__ == "__main__":
@@ -152,11 +159,11 @@ if __name__ == "__main__":
     content = fetch_all_streams()
     if content:
         print("整理源数据中...")
-        organized = organize_streams(content)
-        if not organized.empty:
-            save_to_txt(organized)
-            save_to_m3u(organized)
-            print(f"✅完成！共处理 {len(organized)} 个节目")
+        df_result = organize_streams(content)
+        if not df_result.empty:
+            save_to_txt(df_result)
+            save_to_m3u(df_result)
+            print(f"✅完成！共处理 {len(df_result)} 条流")
         else:
             print("❌没有解析到有效节目")
     else:
