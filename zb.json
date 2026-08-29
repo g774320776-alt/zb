@@ -27,7 +27,7 @@
           "key": "YK",
           "name": "优酷视频.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/优酷视频.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/优酷视频.py"
         },
         {"key":"TX",
         "name":"腾讯视频[追剧]",
@@ -39,7 +39,7 @@
           "key": "txvm",
           "name": "腾讯视频.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/腾讯视频.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/腾讯视频.py"
         },
 		{"key":"MG",
         "name":"芒果TV[追剧]",
@@ -58,31 +58,31 @@
           "key": "MGtv",
           "name": "芒果TV.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/芒果TV.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/芒果TV.py"
         },
 		{
 			"key": "kf",
 			"name": "咖啡体育直播.py[直播]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/咖啡直播.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/咖啡直播.py"
 		},
 		{
 			"key": "sm",
 			"name": "韩国熊猫直播.py[直播]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/熊猫直播.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/熊猫直播.py"
 		},
 		{
 			"key": "blzb",
 			"name": "哔哩直播.py[直播]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/哔哩直播.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/哔哩直播.py"
 		},
 		{
 			"key": "jhzb",
 			"name": "聚合直播.py[直播]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/聚合直播.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/聚合直播.py"
 		},
 		{
            "key": "央视网页",
@@ -103,80 +103,80 @@
             "key":"youtube2",
             "name":"油管.py[其他]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/油管.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/油管.py"
 		},
 		{
             "key":"youtube3",
             "name":"油管直播.py[直播]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/油管直播.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/油管直播.py"
 		},
         {
 			"key": "FreeOK",
 			"name": "FreeOK.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/FreeOK.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/FreeOK.py"
 		},
         {
 			"key": "真狼影视",
 			"name": "真狼影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/真狼影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/真狼影视.py"
 		},
         {
 			"key": "初见影视",
 			"name": "初见影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/初见影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/初见影视.py"
 		},
         {
 			"key": "好剧屋",
 			"name": "好剧屋.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/好剧屋.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/好剧屋.py"
 		},
 		{
 			"key": "奈非工厂",
 			"name": "奈非工厂.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/奈非工厂.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/奈非工厂.py"
 		},
 		{
 			"key": "视觉影院",
 			"name": "视觉影院.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/视觉影院.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/视觉影院.py"
 		},
 		{
 			"key": "袋鼠影视",
 			"name": "袋鼠影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/袋鼠影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/袋鼠影视.py"
 		},
 		{
            "key": "ppx",
            "name": "皮皮虾.py[追剧]",
            "type": 3,
-           "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/皮皮虾.py",
+           "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/皮皮虾.py",
            "ext": "http://43.248.117.123:4680"
        },
 		{
 			"key": "ddvm",
 			"name": "嘀嗒影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/嘀嗒影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/嘀嗒影视.py"
 		},
 		{
 			"key": "kkvm",
 			"name": "可可影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/可可影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/可可影视.py"
 		},
 		{
 			"key": "豆花影视",
 			"name": "豆花影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/豆花影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/豆花影视.py"
 		},
 		{
 			"key": "开心影院",
@@ -217,175 +217,175 @@
 			"key": "808yr",
 			"name": "808影院.py(关梯[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/808影院.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/808影院.py"
 		},
 		{
 			"key": "gqc",
 			"name": "共青春影院.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/共青春影院.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/共青春影院.py"
 		},
 		{
 			"key": "qlys",
 			"name": "麒麟影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麒麟影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麒麟影视.py"
 		},
 		{
 			"key": "qdvm",
 			"name": "奇点影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/奇点影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/奇点影视.py"
 		},
 		{
 			"key": "zzvm",
 			"name": "枝枝影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/枝枝影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/枝枝影视.py"
 		},
 		{
 			"key": "knvm",
 			"name": "柯南影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/柯南影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/柯南影视.py"
 		},
 		{
 			"key": "teys",
 			"name": "太乙影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/太乙影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/太乙影视.py"
 		},
 		{
 			"key": "wkvm",
 			"name": "悟空影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悟空影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悟空影视.py"
 		},
 		{
 			"key": "xmvm",
 			"name": "神马影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/神马影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/神马影视.py"
 		},
 		{
 			"key": "4K影视",
 			"name": "4K影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/4K影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/4K影视.py"
 		},
 		{
 			"key": "蝶卡影视",
 			"name": "蝶卡影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/蝶卡影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/蝶卡影视.py"
 		},
 		{
 			"key": "ddyy",
 			"name": "低端影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/低端影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/低端影视.py"
 		},
 		{
 			"key": "cbh",
 			"name": "茶杯狐.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/茶杯狐.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/茶杯狐.py"
 		},
 		{
 			"key": "hxq",
 			"name": "韩小圈.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/韩小圈.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/韩小圈.py"
 		},
 		{
 			"key": "美剧天堂",
 			"name": "美剧天堂.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/美剧天堂.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/美剧天堂.py"
 		},
 		{
 			"key": "ww",
 			"name": "哇哇APP.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/哇哇APP.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/哇哇APP.py"
 		},
 		{
 			"key": "rb",
 			"name": "热播APP.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/热播APP.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/热播APP.py"
 		},
 		{
 			"key": "JP",
 			"name": "金牌APP.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/金牌APP.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/金牌APP.py"
 		},
 		{
 			"key": "GZ",
 			"name": "瓜子APP.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/瓜子APP.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/瓜子APP.py"
 		},
 		{
 			"key": "nnyy",
 			"name": "努努影院.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/努努影院.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/努努影院.py"
 		},
 		{
 			"key": "dnyy",
 			"name": "多瑙影院.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/多瑙影院.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/多瑙影院.py"
 		},
 		{
 			"key": "nvm",
 			"name": "泥视频.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/泥视频.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/泥视频.py"
 		},
 		{
 			"key": "QU",
 			"name": "奇优影院.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/奇优影院.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/奇优影院.py"
 		},
 		{
           "key": "yl",
           "name": "永乐视频.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/永乐视频.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/永乐视频.py"
         },
 		{
           "key": "mtyy",
           "name": "麦田影院.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麦田影院.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麦田影院.py"
         },
 		{
           "key": "58vy",
           "name": "58影视.py(关梯)[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/58影视.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/58影视.py"
         },
 		{
           "key": "sdvy",
           "name": "兄弟影视.py(关梯)[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/兄弟影视.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/兄弟影视.py"
         },
 		{
           "key": "jgvy",
           "name": "追光影视.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/追光影视.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/追光影视.py"
         },
 		{
 			"key": "bbzj",
 			"name": "布布追剧.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/布布追剧.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/布布追剧.py"
 		},
 		{
 			"key": "布布追剧",
@@ -398,121 +398,121 @@
           "key": "ikbot",
           "name": "爱看机器人.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/爱看机器人.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/爱看机器人.py"
         },
 		{
           "key": "jok",
           "name": "剧OK.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/剧OK.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/剧OK.py"
         },
 		{
           "key": "xhvm",
           "name": "骚火影视.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/骚火影视.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/骚火影视.py"
         },
 		{
           "key": "ayf",
           "name": "爱壹帆影视.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/爱壹帆.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/爱壹帆.py"
         },
 		{
           "key": "MH",
           "name": "麻花影视.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麻花影视.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麻花影视.py"
         },
 		{
           "key": "XH",
           "name": "星河影视.py[追剧]",
           "type": 3,
-          "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星河影视.py"
+          "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星河影视.py"
         },
 		{
 			"key": "guanfeng",
 			"name": "观风影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/观风影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/观风影视.py"
 		},
 		{
 			"key": "SZ",
 			"name": "山楂影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/山楂影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/山楂影视.py"
 		},
 		{
 			"key": "qmvm",
 			"name": "七猫影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/七猫影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/七猫影视.py"
 		},
 		{
 			"key": "nmvm",
 			"name": "农民影视.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/农民影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/农民影视.py"
 		},
 		{
 			"key": "xc",
 			"name": "星辰影院.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星辰影院.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星辰影院.py"
 		},
 		{
 			"key": "hstv",
 			"name": "华数TV.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/华数TV.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/华数TV.py"
 		},
 		{
 			"key": "dttv",
 			"name": "蛋挞TV.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/蛋挞TV.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/蛋挞TV.py"
 		},
 		{
 			"key": "wstv",
 			"name": "威视TV.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/威视TV.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/威视TV.py"
 		},
 		{
 			"key": "dsys",
 			"name": "毒舌影视.py(关梯)[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/毒舌影视.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/毒舌影视.py"
 		},
 		{
            "key": "456dy",
            "name": "456电影网.py[追剧]",
            "type": 3,
-           "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/456电影网.py"
+           "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/456电影网.py"
         },
 		{
            "key": "qw",
            "name": "七味.py(关梯)[追剧]",
            "type": 3,
-           "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/七味.py"
+           "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/七味.py"
         },
 		{
            "key": "8tdy",
            "name": "八天电影.py[追剧]",
            "type": 3,
-           "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/八天电影.py"
+           "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/八天电影.py"
         },
 		{
            "key": "ysxq",
            "name": "映像星球.py(关梯)[追剧]",
            "type": 3,
-           "api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/映像星球.py"
+           "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/映像星球.py"
         },
 		{
 			"key": "cjjh",
 			"name": "采集聚合.py[追剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/采集聚合.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/采集聚合.py"
 		},
 		 {
         "key":"6v",
@@ -627,25 +627,25 @@
 			"key": "动漫啦",
 			"name": "[动漫]动漫啦.py(羊壳观看)[动漫]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/动漫啦.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/动漫啦.py"
 		},
 		{
 			"key": "MiFun",
 			"name": "MiFun动漫.py[动漫]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/MiFun动漫.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/MiFun动漫.py"
 		},
         {
 			"key": "动漫巴士",
 			"name": "动漫巴士.py[动漫]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/动漫巴士.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/动漫巴士.py"
 		},
 		{
 			"key": "短剧巴士",
 			"name": "短剧巴士.py(关梯)[短剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/短剧巴士.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/短剧巴士.py"
 		},
         {
       "key": "cj_360资源",
@@ -670,49 +670,49 @@
 			"key": "悟圣短剧",
 			"name": "悟圣短剧.py[短剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悟圣短剧.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悟圣短剧.py"
 		},
 		{
 			"key": "喜福网",
 			"name": "喜福短剧.py[短剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/喜福短剧.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/喜福短剧.py"
 		},
 		{
 			"key": "smdj",
 			"name": "星芽短剧.py[短剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星芽短剧.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星芽短剧.py"
 		},
 		{
 			"key": "hmjc",
 			"name": "河马剧场.py[短剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/河马剧场.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/河马剧场.py"
 		},
 		{
 			"key": "djjh",
 			"name": "短剧聚合.py[短剧]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/短剧聚合.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/短剧聚合.py"
 		},
 		{
 			"key": "ytb",
 			"name": "悦听吧.py[听书]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悦听吧.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悦听吧.py"
 		},
 		{
 			"key": "275ts",
 			"name": "275听书.py[听书]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/275听书.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/275听书.py"
 		},
 		{
 			"key": "kwms",
 			"name": "酷我音乐.py[音乐]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/酷我音乐.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/酷我音乐.py"
 		},
 		{
             "key": "捡的音乐",
@@ -729,7 +729,7 @@
 			"key": "djyy",
 			"name": "DJ呦呦.py[音乐]",
 			"type": 3,
-			"api": "https://gh‑proxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/DJ呦呦.py"
+			"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/DJ呦呦.py"
 		},
         {
             "key": "豆瓣",
