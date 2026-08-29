@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-auto_load.py 自动加载本仓库 py 和 js 文件夹全部爬虫
+自动加载.py 自动加载本仓库 py 和 js 文件夹全部爬虫
 仓库: g774320776-alt / zb
 存放位置：仓库【根目录】，禁止放到 py/js 子文件夹
 """
@@ -28,7 +28,7 @@ class AutoSpider(Spider):
         {"path": "js", "ext": ".js", "type": 2, "prefix": "【JS】"},
     ]
 
-    # 固定前置锁定源（已删除第三方自动加载678.py，只保留弹幕）
+    # 固定前置锁定源（只保留弹幕）
     _LOCKED_SITES = [
         {
             "name": "🐬弹幕",
@@ -132,8 +132,9 @@ class AutoSpider(Spider):
                     "api": raw_url,
                     "type": cfg["type"]
                 }
+                # ✅关键修复：type‑id，短横线！不是type_id
                 self.class_list.append({
-                    "type_id": tid,
+                    "type‑id": tid,
                     "type_name": f"{cfg['prefix']}{name_no_ext}"
                 })
 
