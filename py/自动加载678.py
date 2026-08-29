@@ -23,13 +23,13 @@ class Spider(Spider):
     # 🔒 锁定在 sites 第 0、1 位的配置，无论扫描结果如何始终存在
     _LOCKED_SITES = [
 		{
-            "name": "自动加载",
+            "name": "🐬自动加载",
             "key": "自动加载",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/EHR663/refs/heads/main/py/自动加载678.py"
          },
 		{
-            "name": "弹幕",
+            "name": "🐬弹幕",
             "key": "弹幕豆瓣",
             "type": 3,
             "api": "csp_SecureDanmu",
