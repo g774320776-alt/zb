@@ -2,7 +2,7 @@ name: Update
 
 on:
   schedule:
-    - cron: 0 21 * * *   # UTC21点 → 北京时间05:00执行
+    - cron: 0 21 * * *
   workflow_dispatch:
 
 permissions:
@@ -10,7 +10,7 @@ permissions:
 
 env:
   TZ: Asia/Shanghai
-  BRANCH: main   # 如果你的仓库是master，这里改成 master
+  BRANCH: main
 
 jobs:
   Update:
@@ -39,14 +39,12 @@ jobs:
       - name: Run iptv generate script
         run: python get_iptv.py
 
-      # 打印生成文件大小，方便排错
       - name: Show generated file info
         run: |
           ls -lh iptv.txt iptv.m3u
           echo "iptv.txt lines: $(wc -l < iptv.txt)"
           echo "iptv.m3u lines: $(wc -l < iptv.m3u)"
 
-      # 如果生成文件行数为0，直接终止，不提交空文件
       - name: Skip commit if output empty
         run: |
           TXT_LINES=$(wc -l < iptv.txt)
@@ -56,15 +54,14 @@ jobs:
             exit 1
           fi
 
+      # 改用echo分行输出，不再用<<EOF，消除YAML解析报错
       - name: Generate README.md
         run: |
-          cat > README.md <<EOF
-## IPTV源自动更新
-更新时间：\${{ env.DATE }}
-
-- iptv.txt：\`https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH }}/iptv.txt\`
-- iptv.m3u：\`https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH }}/iptv.m3u\`
-EOF
+          echo "## IPTV源自动更新" > README.md
+          echo "更新时间：${{ env.DATE }}" >> README.md
+          echo "" >> README.md
+          echo "- iptv.txt：https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH }}/iptv.txt" >> README.md
+          echo "- iptv.m3u：https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH }}/iptv.m3u" >> README.md
 
       - name: Configure Git bot identity
         run: |
