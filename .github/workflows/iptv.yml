@@ -1,66 +1,82 @@
 name: Update
 
-# 触发规则
 on:
   schedule:
-    - cron: 0 21 * * *   # UTC时间21点 → 北京时间05:00执行
-  workflow_dispatch:     # 支持网页手动点击运行
+    - cron: 0 21 * * *   # UTC21点 → 北京时间05:00执行
+  workflow_dispatch:
 
 permissions:
-  contents: write        # 授予仓库读写权限，允许git push提交
+  contents: write
 
 env:
-  TZ: Asia/Shanghai      # 环境时区设为上海
+  TZ: Asia/Shanghai
+  BRANCH: main   # 如果你的仓库是master，这里改成 master
 
 jobs:
   Update:
     runs-on: ubuntu-latest
-    timeout-minutes: 20  # 任务最大超时20分钟
+    timeout-minutes: 20
 
     steps:
-      # 1.拉取仓库代码
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2.获取北京时间存入环境变量 DATE
       - name: Get current Beijing time
-        run: echo "DATE=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+        run: echo "DATE=$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
-      # 3.安装Python3环境
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
-      # 4.安装python依赖 pandas requests
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pandas requests
 
-      # 5.运行iptv生成脚本，输出iptv.txt、iptv.m3u
       - name: Run iptv generate script
         run: python get_iptv.py
 
-      # 6.覆盖生成README.md，仅写入更新时间
+      # 打印生成文件大小，方便排错
+      - name: Show generated file info
+        run: |
+          ls -lh iptv.txt iptv.m3u
+          echo "iptv.txt lines: $(wc -l < iptv.txt)"
+          echo "iptv.m3u lines: $(wc -l < iptv.m3u)"
+
+      # 如果生成文件行数为0，直接终止，不提交空文件
+      - name: Skip commit if output empty
+        run: |
+          TXT_LINES=$(wc -l < iptv.txt)
+          M3U_LINES=$(wc -l < iptv.m3u)
+          if [ "$TXT_LINES" -eq 0 ] || [ "$M3U_LINES" -eq 0 ];then
+            echo "生成的播放列表为空，终止工作流，不提交"
+            exit 1
+          fi
+
       - name: Generate README.md
         run: |
-          echo "## 更新于 $DATE" > README.md
+          cat > README.md <<EOF
+## IPTV源自动更新
+更新时间：\${{ env.DATE }}
 
-      # 7.配置git机器人提交身份
+- iptv.txt：\`https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH }}/iptv.txt\`
+- iptv.m3u：\`https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH }}/iptv.m3u\`
+EOF
+
       - name: Configure Git bot identity
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      # 8.提交文件推送到main分支；--allow-empty允许无文件改动也生成提交记录
       - name: Commit & push files
         run: |
           git add iptv.txt iptv.m3u README.md
           git commit -m "Update on ${{ env.DATE }}" --allow-empty
-          git push origin main
+          git push origin ${{ env.BRANCH }}
 
-      # 9.上传产物，Action页面可下载iptv.txt、iptv.m3u
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -68,4 +84,3 @@ jobs:
           path: |
             iptv.txt
             iptv.m3u
-
