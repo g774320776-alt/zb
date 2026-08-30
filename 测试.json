@@ -1,0 +1,1293 @@
+{
+    "sites": [
+    {
+      "key": "src1",
+      "name": "4K影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/4K影视.py"
+    },
+    {
+      "key": "src2",
+      "name": "30剧集网🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/30剧集网🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src3",
+      "name": "58影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/58影视.py"
+    },
+    {
+      "key": "src4",
+      "name": "66大片网🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/66大片网🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src5",
+      "name": "275听书",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/275听书.py"
+    },
+    {
+      "key": "src6",
+      "name": "456电影网",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/456电影网.py"
+    },
+    {
+      "key": "src7",
+      "name": "808影院",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/808影院.py"
+    },
+    {
+      "key": "src8",
+      "name": "ASMR吧🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/ASMR吧🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src9",
+      "name": "Auete影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/Auete影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src10",
+      "name": "DJ呦呦",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/DJ呦呦.py"
+    },
+    {
+      "key": "src11",
+      "name": "EcoHub影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/EcoHub影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src12",
+      "name": "FoFo影院🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/FoFo影院🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src13",
+      "name": "FreeOK",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/FreeOK.py"
+    },
+    {
+      "key": "src14",
+      "name": "MiFun动漫",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/MiFun动漫.py"
+    },
+    {
+      "key": "src15",
+      "name": "pomo🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/pomo🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src16",
+      "name": "vidhub🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/vidhub🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src17",
+      "name": "VIP兔🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/VIP兔🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src18",
+      "name": "VS影院🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/VS影院🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src19",
+      "name": "爱看机器人",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/爱看机器人.py"
+    },
+    {
+      "key": "src20",
+      "name": "爱壹帆",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/爱壹帆.py"
+    },
+    {
+      "key": "src21",
+      "name": "八戒影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/八戒影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src22",
+      "name": "八天电影",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/八天电影.py"
+    },
+    {
+      "key": "src23",
+      "name": "百花影院🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/百花影院🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src24",
+      "name": "哔哩直播",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/哔哩直播.py"
+    },
+    {
+      "key": "src25",
+      "name": "采集聚合",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/采集聚合.py"
+    },
+    {
+      "key": "src26",
+      "name": "草莓影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/草莓影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src27",
+      "name": "茶杯狐",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/茶杯狐.py"
+    },
+    {
+      "key": "src28",
+      "name": "厂长影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/厂长影视.py"
+    },
+    {
+      "key": "src29",
+      "name": "厂长资源🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/厂长资源🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src30",
+      "name": "初见影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/初见影视.py"
+    },
+    {
+      "key": "src31",
+      "name": "大马猴🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/大马猴🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src32",
+      "name": "大象短剧🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/大象短剧🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src33",
+      "name": "袋鼠影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/袋鼠影视.py"
+    },
+    {
+      "key": "src34",
+      "name": "蛋挞TV",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/蛋挞TV.py"
+    },
+    {
+      "key": "src35",
+      "name": "低端影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/低端影视.py"
+    },
+    {
+      "key": "src36",
+      "name": "嘀嗒影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/嘀嗒影视.py"
+    },
+    {
+      "key": "src37",
+      "name": "电影侠🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/电影侠🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src38",
+      "name": "蝶卡影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/蝶卡影视.py"
+    },
+    {
+      "key": "src39",
+      "name": "动漫巴士",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/动漫巴士.py"
+    },
+    {
+      "key": "src40",
+      "name": "动漫啦",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/动漫啦.py"
+    },
+    {
+      "key": "src41",
+      "name": "豆花影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/豆花影视.py"
+    },
+    {
+      "key": "src42",
+      "name": "毒舌短剧🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/毒舌短剧🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src43",
+      "name": "毒舌影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/毒舌影视.py"
+    },
+    {
+      "key": "src44",
+      "name": "短剧巴士",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/短剧巴士.py"
+    },
+    {
+      "key": "src45",
+      "name": "短剧聚合",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/短剧聚合.py"
+    },
+    {
+      "key": "src46",
+      "name": "多多影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/多多影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src47",
+      "name": "多瑙影院",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/多瑙影院.py"
+    },
+    {
+      "key": "src48",
+      "name": "饭搭子影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/饭搭子影视.py"
+    },
+    {
+      "key": "src49",
+      "name": "飞快TV🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/飞快TV🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src50",
+      "name": "飞流视频🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/飞流视频🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src51",
+      "name": "枫叶4K",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/枫叶4K.py"
+    },
+    {
+      "key": "src52",
+      "name": "枫叶音乐",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/枫叶音乐.py"
+    },
+    {
+      "key": "src53",
+      "name": "枫叶影院🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/枫叶影院🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src54",
+      "name": "楓林網🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/楓林網🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src55",
+      "name": "高清点播🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/高清点播🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src56",
+      "name": "共和国动漫🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/共和国动漫🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src57",
+      "name": "共青春影院",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/共青春影院.py"
+    },
+    {
+      "key": "src58",
+      "name": "瓜子APP",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/瓜子APP.py"
+    },
+    {
+      "key": "src59",
+      "name": "观风影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/观风影视.py"
+    },
+    {
+      "key": "src60",
+      "name": "韩小圈",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/韩小圈.py"
+    },
+    {
+      "key": "src61",
+      "name": "好好看🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/好好看🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src62",
+      "name": "好剧屋",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/好剧屋.py"
+    },
+    {
+      "key": "src63",
+      "name": "河马剧场",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/河马剧场.py"
+    },
+    {
+      "key": "src64",
+      "name": "华数TV",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/华数TV.py"
+    },
+    {
+      "key": "src65",
+      "name": "金牌APP",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/金牌APP.py"
+    },
+    {
+      "key": "src66",
+      "name": "剧OK",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/剧OK.py"
+    },
+    {
+      "key": "src67",
+      "name": "剧下饭4K🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/剧下饭4K🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src68",
+      "name": "聚合直播",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/聚合直播.py"
+    },
+    {
+      "key": "src69",
+      "name": "君念影院🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/君念影院🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src70",
+      "name": "咖啡直播",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/咖啡直播.py"
+    },
+    {
+      "key": "src71",
+      "name": "看剧AI🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/看剧AI🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src72",
+      "name": "看戏影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/看戏影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src73",
+      "name": "柯南影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/柯南影视.py"
+    },
+    {
+      "key": "src74",
+      "name": "可可影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/可可影视.py"
+    },
+    {
+      "key": "src75",
+      "name": "酷我音乐",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/酷我音乐.py"
+    },
+    {
+      "key": "src76",
+      "name": "麻花影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麻花影视.py"
+    },
+    {
+      "key": "src77",
+      "name": "麦田影院",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麦田影院.py"
+    },
+    {
+      "key": "src78",
+      "name": "芒果TV",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/芒果TV.py"
+    },
+    {
+      "key": "src79",
+      "name": "美剧天堂",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/美剧天堂.py"
+    },
+    {
+      "key": "src80",
+      "name": "奈非工厂",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/奈非工厂.py"
+    },
+    {
+      "key": "src81",
+      "name": "泥视频",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/泥视频.py"
+    },
+    {
+      "key": "src82",
+      "name": "农民影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/农民影视.py"
+    },
+    {
+      "key": "src83",
+      "name": "努努影院",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/努努影院.py"
+    },
+    {
+      "key": "src84",
+      "name": "糯米短剧",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/糯米短剧.py"
+    },
+    {
+      "key": "src85",
+      "name": "泡泡影院🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/泡泡影院🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src86",
+      "name": "皮皮虾",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/皮皮虾.py"
+    },
+    {
+      "key": "src87",
+      "name": "七猫影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/七猫影视.py"
+    },
+    {
+      "key": "src88",
+      "name": "七味",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/七味.py"
+    },
+    {
+      "key": "src89",
+      "name": "奇点影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/奇点影视.py"
+    },
+    {
+      "key": "src90",
+      "name": "奇优影院",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/奇优影院.py"
+    },
+    {
+      "key": "src91",
+      "name": "麒麟影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麒麟影视.py"
+    },
+    {
+      "key": "src92",
+      "name": "千千音乐🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/千千音乐🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src93",
+      "name": "千千影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/千千影视.py"
+    },
+    {
+      "key": "src94",
+      "name": "青空次元🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/青空次元🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src95",
+      "name": "青牛影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/青牛影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src96",
+      "name": "青蛙影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/青蛙影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src97",
+      "name": "热播APP",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/热播APP.py"
+    },
+    {
+      "key": "src98",
+      "name": "骚火影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/骚火影视.py"
+    },
+    {
+      "key": "src99",
+      "name": "山水影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/山水影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src100",
+      "name": "神马影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/神马影视.py"
+    },
+    {
+      "key": "src101",
+      "name": "视觉影院",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/视觉影院.py"
+    },
+    {
+      "key": "src102",
+      "name": "首映网🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/首映网🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src103",
+      "name": "刷不停短剧🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/刷不停短剧🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src104",
+      "name": "搜剧AI🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/搜剧AI🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src105",
+      "name": "太乙影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/太乙影视.py"
+    },
+    {
+      "key": "src106",
+      "name": "腾爱优芒B🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/腾爱优芒B🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src107",
+      "name": "腾讯视频",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/腾讯视频.py"
+    },
+    {
+      "key": "src108",
+      "name": "听书网456🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/听书网456🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src109",
+      "name": "兔岛影院🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/兔岛影院🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src110",
+      "name": "哇哇APP",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/哇哇APP.py"
+    },
+    {
+      "key": "src111",
+      "name": "网飞TV",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/网飞TV.py"
+    },
+    {
+      "key": "src112",
+      "name": "威视TV",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/威视TV.py"
+    },
+    {
+      "key": "src113",
+      "name": "悟空影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悟空影视.py"
+    },
+    {
+      "key": "src114",
+      "name": "悟圣短剧",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悟圣短剧.py"
+    },
+    {
+      "key": "src115",
+      "name": "喜福短剧",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/喜福短剧.py"
+    },
+    {
+      "key": "src116",
+      "name": "夏日影院🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/夏日影院🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src117",
+      "name": "仙腾影院🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/仙腾影院🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src118",
+      "name": "星辰影院",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星辰影院.py"
+    },
+    {
+      "key": "src119",
+      "name": "星河影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星河影视.py"
+    },
+    {
+      "key": "src120",
+      "name": "星梦Asmr🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星梦Asmr🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src121",
+      "name": "星芽短剧",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星芽短剧.py"
+    },
+    {
+      "key": "src122",
+      "name": "兄弟影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/兄弟影视.py"
+    },
+    {
+      "key": "src123",
+      "name": "熊猫直播",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/熊猫直播.py"
+    },
+    {
+      "key": "src124",
+      "name": "一起影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/一起影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src125",
+      "name": "易听书网🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/易听书网🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src126",
+      "name": "音乐聚合🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/音乐聚合🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src127",
+      "name": "樱之空动漫🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/樱之空动漫🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src128",
+      "name": "影视大全",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/影视大全.py"
+    },
+    {
+      "key": "src129",
+      "name": "影视大全🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/影视大全🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src130",
+      "name": "映刻短剧🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/映刻短剧🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src131",
+      "name": "映像星球",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/映像星球.py"
+    },
+    {
+      "key": "src132",
+      "name": "永乐视频",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/永乐视频.py"
+    },
+    {
+      "key": "src133",
+      "name": "优酷视频",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/优酷视频.py"
+    },
+    {
+      "key": "src134",
+      "name": "油管",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/油管.py"
+    },
+    {
+      "key": "src135",
+      "name": "油管直播",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/油管直播.py"
+    },
+    {
+      "key": "src136",
+      "name": "悦听吧",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悦听吧.py"
+    },
+    {
+      "key": "src137",
+      "name": "宅男影视🍀TG @hshsjk9",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/宅男影视🍀TG @hshsjk9.py"
+    },
+    {
+      "key": "src138",
+      "name": "真狼影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/真狼影视.py"
+    },
+    {
+      "key": "src139",
+      "name": "枝枝影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/枝枝影视.py"
+    },
+    {
+      "key": "src140",
+      "name": "智能加载v5.1",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/智能加载v5.1.py"
+    },
+    {
+      "key": "src141",
+      "name": "追光影视",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/追光影视.py"
+    },
+    {
+      "key": "src142",
+      "name": "追影",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/追影.py"
+    }
+  ],
+    "lives": [
+         {
+            "name": "自用",
+            "type": 0,
+            "playerType": 2,
+            "ua": "okhttp",
+			"url": "https://gh-proxy.org/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/iptv.m3u"
+         },
+		{
+            "name": "咪咕直播",
+            "type": 0,
+            "ua": "okhttp/5.3.2",
+            "url": "http://www.52top.com.cn:678/downloads/migu.txt"
+        }
+    ],
+    "parses": [
+        {
+            "name": "聚合",
+            "type": 3,
+            "url": "Web"
+        },
+       {
+            "name": "盘古解析",
+            "type": 0,
+            "url": "https://www.playm3u8.cn/jiexi.php?url=",
+            "ext": {
+                "header": {
+                    "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
+                }
+            }
+        },
+		{
+           "name": "789解析1",
+           "type": 0,
+           "url": "https://jiexi.789jiexi.icu:4433/?url="
+        },
+		{
+           "name": "789解析2",
+           "type": 0,
+           "url": "https://jiexi.789jiexi.com/?url="
+        },
+		{
+            "name": "虾米解析",
+            "type": 0,
+            "url": "https://jx.xmflv.com/?url="
+        },
+		{
+            "name": "淘片解析",
+            "type": 0,
+            "url": "https://jx.yparse.com/index.php?url="
+        },
+     {
+      "name": "解析1",
+      "type": 0,
+      "url": "https://huayong.net/999/?v="
+    },
+    {
+      "name": "解析2",
+      "type": 0,
+      "url": "https://jx.m3u8.tv/jiexi/?url="
+    },
+    {
+      "name": "解析3",
+      "type": 0,
+      "url": "https://t2.qlplayer.cyou/player/analysis.php?v="
+    },
+		
+	{
+      "name": "解析4",
+      "type": 0,
+      "url": "https://www.ckplayer.vip/jiexi/?url="
+    },
+    {
+      "name": "解析5",
+      "type": 0,
+      "url": "https://nm.xxxc137.top/static/player/artplayer.html?url="
+    },
+      {
+      "name": "解析6",
+      "type": 0,
+      "url": "https://www.yemu.xyz/?url="
+        },
+		{
+      "name": "解析7",
+      "type": 0,
+      "url": "http://rihou.cc:88/demo.php?url="
+        },
+        {
+            "name": "冰豆",
+            "type": 0,
+            "url": "https://bd.jx.cn/?url=",
+            "ext": {
+                "header": {
+                    "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
+                }
+            }
+        },
+        {
+            "name": "七七",
+            "type": 0,
+            "url": "https://jx.77flv.cc/?url=",
+            "ext": {
+                "header": {
+                    "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
+                }
+            }
+        },
+        {
+            "name": "夜幕",
+            "type": 0,
+            "url": "https://yemu.xyz/?url=",
+            "ext": {
+                "header": {
+                    "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
+                }
+            }
+        }
+    ],
+    "rules": [
+        {
+            "name": "农民",
+            "hosts": [
+                "toutiaovod.com"
+            ],
+            "regex": [
+                "video/tos/cn"
+            ]
+        },
+        {
+            "name": "火山",
+            "hosts": [
+                "huoshan.com"
+            ],
+            "regex": [
+                "item_id="
+            ]
+        },
+        {
+            "name": "抖音",
+            "hosts": [
+                "douyin.com"
+            ],
+            "regex": [
+                "is_play_url="
+            ]
+        },
+        {
+            "name": "磁力广告",
+            "hosts": [
+                "magnet"
+            ],
+            "regex": [
+                "更多",
+                "请访问",
+                "example",
+                "社 區",
+                "x u u",
+                "直 播",
+                "更 新",
+                "社 区",
+                "有趣",
+                "有 趣",
+                "英皇体育",
+                "全中文AV在线",
+                "澳门皇冠赌场",
+                "哥哥快来",
+                "美女荷官",
+                "裸聊",
+                "新片首发",
+                "UUE29"
+            ]
+        },
+        {
+            "name": "饭团点击",
+            "hosts": [
+                "dadagui",
+                "freeok",
+                "dadagui"
+            ],
+            "script": [
+                "document.querySelector(\"#playleftiframe\").contentWindow.document.querySelector(\"#start\").click();"
+            ]
+        },
+        {
+            "name": "毛驴点击",
+            "hosts": [
+                "www.maolvys.com"
+            ],
+            "script": [
+                "document.getElementsByClassName('swal-buttonswal-button--confirm')[0].click()"
+            ]
+        }
+    ],
+    "doh": [
+		{
+            "name": "Google",
+            "url": "https://dns.google/dns-query",
+            "ips": [
+                "8.8.4.4",
+                "8.8.8.8"
+            ]
+        },
+        {
+            "name": "Cloudflare",
+            "url": "https://cloudflare-dns.com/dns-query",
+            "ips": [
+                "1.1.1.1",
+                "1.0.0.1",
+                "2606:4700:4700::1111",
+                "2606:4700:4700::1001"
+            ]
+        },
+        {
+            "name": "AdGuard",
+            "url": "https://dns.adguard.com/dns-query",
+            "ips": [
+                "94.140.14.140",
+                "94.140.14.141"
+            ]
+        },
+        {
+            "name": "DNSWatch",
+            "url": "https://resolver2.dns.watch/dns-query",
+            "ips": [
+                "84.200.69.80",
+                "84.200.70.40"
+            ]
+        },
+        {
+            "name": "Quad9",
+            "url": "https://dns.quad9.net/dns-quer",
+            "ips": [
+                "9.9.9.9",
+                "149.112.112.112"
+            ]
+        }
+    ],
+    "flags": [
+        "youku",
+        "优酷",
+        "优 酷",
+        "优酷视频",
+        "qq",
+        "腾讯",
+        "腾 讯",
+        "腾讯视频",
+        "iqiyi",
+        "qiyi",
+        "奇艺",
+        "爱奇艺",
+        "爱 奇 艺",
+        "m1905",
+        "xigua",
+        "letv",
+        "leshi",
+        "乐视",
+        "乐 视",
+        "sohu",
+        "搜狐",
+        "搜 狐",
+        "搜狐视频",
+        "tudou",
+        "pptv",
+        "mgtv",
+        "芒果",
+        "imgo",
+        "芒果TV",
+        "芒 果 T V",
+        "bilibili",
+        "哔 哩",
+        "哔 哩 哔 哩"
+    ],
+    "ijk": [
+        {
+            "group": "软解码",
+            "options": [
+                {
+                    "category": 4,
+                    "name": "opensles",
+                    "value": "0"
+                },
+                {
+                    "category": 4,
+                    "name": "overlay-format",
+                    "value": "842225234"
+                },
+                {
+                    "category": 4,
+                    "name": "framedrop",
+                    "value": "1"
+                },
+                {
+                    "category": 4,
+                    "name": "soundtouch",
+                    "value": "1"
+                },
+                {
+                    "category": 4,
+                    "name": "start-on-prepared",
+                    "value": "1"
+                },
+                {
+                    "category": 1,
+                    "name": "http-detect-range-support",
+                    "value": "0"
+                },
+                {
+                    "category": 1,
+                    "name": "fflags",
+                    "value": "fastseek"
+                },
+                {
+                    "category": 2,
+                    "name": "skip_loop_filter",
+                    "value": "48"
+                },
+                {
+                    "category": 4,
+                    "name": "reconnect",
+                    "value": "1"
+                },
+                {
+                    "category": 4,
+                    "name": "enable-accurate-seek",
+                    "value": "0"
+                },
+                {
+                    "category": 4,
+                    "name": "mediacodec",
+                    "value": "0"
+                },
+                {
+                    "category": 4,
+                    "name": "mediacodec-auto-rotate",
+                    "value": "0"
+                },
+                {
+                    "category": 4,
+                    "name": "mediacodec-handle-resolution-change",
+                    "value": "0"
+                },
+                {
+                    "category": 4,
+                    "name": "mediacodec-hevc",
+                    "value": "0"
+                },
+                {
+                    "category": 1,
+                    "name": "dns_cache_timeout",
+                    "value": "600000000"
+                }
+            ]
+        },
+        {
+            "group": "硬解码",
+            "options": [
+                {
+                    "category": 4,
+                    "name": "opensles",
+                    "value": "0"
+                },
+                {
+                    "category": 4,
+                    "name": "overlay-format",
+                    "value": "842225234"
+                },
+                {
+                    "category": 4,
+                    "name": "framedrop",
+                    "value": "1"
+                },
+                {
+                    "category": 4,
+                    "name": "soundtouch",
+                    "value": "1"
+                },
+                {
+                    "category": 4,
+                    "name": "start-on-prepared",
+                    "value": "1"
+                },
+                {
+                    "category": 1,
+                    "name": "http-detect-range-support",
+                    "value": "0"
+                },
+                {
+                    "category": 1,
+                    "name": "fflags",
+                    "value": "fastseek"
+                },
+                {
+                    "category": 2,
+                    "name": "skip_loop_filter",
+                    "value": "48"
+                },
+                {
+                    "category": 4,
+                    "name": "reconnect",
+                    "value": "1"
+                },
+                {
+                    "category": 4,
+                    "name": "enable-accurate-seek",
+                    "value": "0"
+                },
+                {
+                    "category": 4,
+                    "name": "mediacodec",
+                    "value": "1"
+                },
+                {
+                    "category": 4,
+                    "name": "mediacodec-auto-rotate",
+                    "value": "1"
+                },
+                {
+                    "category": 4,
+                    "name": "mediacodec-handle-resolution-change",
+                    "value": "1"
+                },
+                {
+                    "category": 4,
+                    "name": "mediacodec-hevc",
+                    "value": "1"
+                },
+                {
+                    "category": 1,
+                    "name": "dns_cache_timeout",
+                    "value": "600000000"
+                }
+            ]
+        }
+    ],
+    "ads": [
+        "static-mozai.4gtv.tv"
+    ]
+}
