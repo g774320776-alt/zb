@@ -1916,8 +1916,15 @@
         }
     ],
     "lives": [
+    {
+            "name": "自用txt",
+            "type": 0,
+            "playerType": 2,
+            "ua": "okhttp",
+			"url": "https://gh-proxy.org/https://raw.githubusercontent.com/g774320776-alt/zb/main/iptv.txt"
+         },
          {
-            "name": "自用",
+            "name": "自用m3u8",
             "type": 0,
             "playerType": 2,
             "ua": "okhttp",
