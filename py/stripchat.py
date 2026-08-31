@@ -27,7 +27,7 @@ class Spider(Spider):
 
     # 2. 备用域名列表
     self.dynamic_urls = [
-        " https://zh.stripol.com/",
+        "https://zh.stripol.com/",
         "https://zh.pikpedcams.com/",
         "https://zh.virtualtaboo.live/",
     ]
