@@ -2,7 +2,7 @@ name: Update
 
 on:
   schedule:
-    - cron: 0 20 * * *
+    - cron: '0 20 * * *'
   workflow_dispatch:
 
 permissions:
@@ -22,9 +22,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Get current Beijing time
-        run: echo "DATE=$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+        run: |
+          echo "DATE=$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S')" >> "$GITHUB_ENV"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -37,31 +39,41 @@ jobs:
           pip install pandas requests
 
       - name: Run iptv generate script
-        run: python get_iptv.py
-
-      - name: Show generated file info
         run: |
+          python get_iptv.py
+
+      - name: Check generated files
+        run: |
+          if [ ! -f iptv.txt ] || [ ! -f iptv.m3u ]; then
+            echo "错误：未生成 iptv.txt 或 iptv.m3u"
+            exit 1
+          fi
+
           ls -lh iptv.txt iptv.m3u
-          echo "iptv.txt lines: $(wc -l < iptv.txt)"
-          echo "iptv.m3u lines: $(wc -l < iptv.m3u)"
+
+          TXT_LINES=$(wc -l < iptv.txt)
+          M3U_LINES=$(wc -l < iptv.m3u)
+
+          echo "iptv.txt lines: $TXT_LINES"
+          echo "iptv.m3u lines: $M3U_LINES"
 
       - name: Skip commit if output empty
         run: |
           TXT_LINES=$(wc -l < iptv.txt)
           M3U_LINES=$(wc -l < iptv.m3u)
-          if [ "$TXT_LINES" -eq 0 ] || [ "$M3U_LINES" -eq 0 ];then
+
+          if [ "$TXT_LINES" -eq 0 ] || [ "$M3U_LINES" -eq 0 ]; then
             echo "生成的播放列表为空，终止工作流，不提交"
             exit 1
           fi
 
-      # 改用echo分行输出，不再用<<EOF，消除YAML解析报错
       - name: Generate README.md
         run: |
           echo "## IPTV源自动更新" > README.md
-          echo "更新时间：${{ env.DATE }}" >> README.md
+          echo "更新时间：${DATE}" >> README.md
           echo "" >> README.md
-          echo "- iptv.txt：https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH }}/iptv.txt" >> README.md
-          echo "- iptv.m3u：https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH }}/iptv.m3u" >> README.md
+          echo "- iptv.txt：https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${BRANCH}/iptv.txt" >> README.md
+          echo "- iptv.m3u：https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${BRANCH}/iptv.m3u" >> README.md
 
       - name: Configure Git bot identity
         run: |
@@ -71,13 +83,23 @@ jobs:
       - name: Commit & push files
         run: |
           git add iptv.txt iptv.m3u README.md
-          git commit -m "Update on ${{ env.DATE }}" --allow-empty
-          git push origin ${{ env.BRANCH }}
+
+          if git diff --cached --quiet; then
+            echo "没有文件变化，跳过提交"
+            exit 0
+          fi
+
+          git commit -m "Update on ${DATE}"
+
+          git pull --rebase origin "${BRANCH}"
+          git push origin "${BRANCH}"
 
       - name: Upload artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: iptv-output
           path: |
             iptv.txt
             iptv.m3u
+          if-no-files-found: warn
