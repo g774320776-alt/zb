@@ -18,32 +18,39 @@ SOURCE_URLS = [
     "https://live.zbds.top/tv/iptv4.txt",
 ]
 
-# 输出目录
 OUTPUT_DIR = "output"
 
-# 获取源列表超时时间
+# 获取 IPTV 列表超时时间
 FETCH_TIMEOUT = 20
 
-# 检测单个直播源超时时间
-CHECK_TIMEOUT = 8
+# 检测直播地址超时时间
+CHECK_TIMEOUT = 10
 
 # 并发检测数量
 MAX_WORKERS = 30
 
-# 获取源失败后的重试次数
+# 获取列表失败重试次数
 RETRIES = 2
 
-# 是否检测每一个直播地址
+# 是否检测直播地址
 ENABLE_CHECK = True
 
-# True：只保留最终 HTTP 200
-# False：允许 2xx / 3xx
-ONLY_STATUS_200 = True
+# ------------------------------------------------------------
+# 重要：
+#
+# False = 不因为 301/302/403 等状态简单粗暴删除
+# 最终结合响应内容判断
+# ------------------------------------------------------------
+
+STRICT_HTTP_200 = False
 
 # User-Agent
 USER_AGENT = (
-    "Mozilla/5.0 (Linux; Android 13) "
-    "AppleWebKit/537.36 Chrome/120.0 Mobile Safari/537.36"
+    "Mozilla/5.0 "
+    "(Linux; Android 13) "
+    "AppleWebKit/537.36 "
+    "(KHTML, like Gecko) "
+    "Chrome/120.0.0.0 Mobile Safari/537.36"
 )
 
 HEADERS = {
@@ -52,7 +59,6 @@ HEADERS = {
     "Connection": "keep-alive",
 }
 
-# 关闭 SSL 警告
 urllib3.disable_warnings(
     urllib3.exceptions.InsecureRequestWarning
 )
@@ -83,19 +89,8 @@ BAN_WORDS = [
 
 
 # ============================================================
-# 频道分类
-#
-# 保持原来的四种分类：
-# 央视频道
-# 卫视频道
-# 少儿频道
-# 地方频道
+# 少儿频道关键词
 # ============================================================
-
-CCTV_PATTERN = re.compile(
-    r"^CCTV[--－]?\s*\d{1,2}([+＋]?)$",
-    re.IGNORECASE
-)
 
 KID_KEYWORDS = [
     "少儿",
@@ -110,14 +105,15 @@ KID_KEYWORDS = [
     "儿童",
 ]
 
-SATELLITE_KEYWORDS = [
-    "卫视",
-]
 
-CCTV_KEYWORDS = [
-    "央视",
-    "CCTV",
-]
+# ============================================================
+# CCTV 判断
+# ============================================================
+
+CCTV_PATTERN = re.compile(
+    r"^CCTV[--－]?\s*\d{1,2}([+＋]?)$",
+    re.IGNORECASE
+)
 
 
 # ============================================================
@@ -125,7 +121,7 @@ CCTV_KEYWORDS = [
 # ============================================================
 
 def is_valid_url(url: str) -> bool:
-    """判断 URL 是否为有效 HTTP/HTTPS 地址"""
+    """检查 HTTP / HTTPS URL"""
 
     if not url:
         return False
@@ -140,6 +136,7 @@ def is_valid_url(url: str) -> bool:
         return False
 
     try:
+
         parsed = urlparse(url)
 
         if not parsed.hostname:
@@ -148,15 +145,15 @@ def is_valid_url(url: str) -> bool:
         return True
 
     except Exception:
+
         return False
 
 
 # ============================================================
-# 清洗频道名称
+# 频道名称清洗
 # ============================================================
 
 def clean_program_name(name: str) -> str:
-    """清洗频道名称"""
 
     if not name:
         return ""
@@ -170,48 +167,52 @@ def clean_program_name(name: str) -> str:
         name
     )
 
-    # 去掉 HTML 标签
+    # 删除 HTML
     name = re.sub(
         r"<[^>]+>",
         "",
         name
     )
 
-    # 全角逗号统一
-    name = name.replace("，", ",")
+    # 全角逗号
+    name = name.replace(
+        "，",
+        ","
+    )
 
-    # 多余空格
+    # 连续空白
     name = re.sub(
         r"\s+",
         " ",
         name
     )
 
-    # 去掉常见画质后缀
+    # 画质后缀
     name = re.sub(
-        r"[\s_\--–—]*(高清|超清|标清|HD|SD|FHD|UHD|4K|2K)$",
+        r"[\s_\-–—]*(高清|超清|标清|HD|SD|FHD|UHD|4K|8K|2K)$",
         "",
         name,
         flags=re.IGNORECASE,
     )
 
-    # 去掉备用 / 线路 / 数字后缀
+    # 线路 / 备用 / 数字后缀
     name = re.sub(
-        r"[\s_\--–—]+(?:备用|备份|线路\d+|\d+)$",
+        r"[\s_\-–—]+(?:备用|备份|线路\d+|\d+)$",
         "",
         name,
         flags=re.IGNORECASE,
     )
 
-    return name.strip(" ,，|")
+    return name.strip(
+        " ,，|"
+    )
 
 
 # ============================================================
-# 垃圾名称判断
+# 垃圾频道判断
 # ============================================================
 
 def is_bad_name(name: str) -> bool:
-    """判断是否属于广告/垃圾频道"""
 
     if not name:
         return True
@@ -219,6 +220,7 @@ def is_bad_name(name: str) -> bool:
     name_low = name.lower()
 
     for word in BAN_WORDS:
+
         if word.lower() in name_low:
             return True
 
@@ -227,47 +229,49 @@ def is_bad_name(name: str) -> bool:
 
 # ============================================================
 # 频道分类
+#
+# 分类保持原来的四类
 # ============================================================
 
 def get_channel_group(name: str) -> str:
-    """
-    保持原始代码分类逻辑：
-
-    少儿频道
-    央视频道
-    卫视频道
-    地方频道
-    """
 
     if not name:
         return "其他频道"
+
+    upper_name = name.upper()
 
     # --------------------------------------------------------
     # 少儿频道优先
     # --------------------------------------------------------
 
     for keyword in KID_KEYWORDS:
+
         if keyword in name:
+
             return "少儿频道"
 
     # --------------------------------------------------------
-    # 央视频道
+    # CCTV
     # --------------------------------------------------------
 
     if CCTV_PATTERN.match(name):
+
         return "央视频道"
 
     if "央视" in name:
+
         return "央视频道"
 
-    if "CCTV" in name.upper():
+    if "CCTV" in upper_name:
+
         return "央视频道"
 
     # --------------------------------------------------------
-    # 卫视频道
+    # 卫视
     # --------------------------------------------------------
 
     if "卫视" in name:
+
         return "卫视频道"
 
     # --------------------------------------------------------
@@ -282,11 +286,14 @@ def get_channel_group(name: str) -> str:
 # ============================================================
 
 def fetch_source(url: str):
-    """下载 IPTV 源列表"""
 
-    print(f"\n正在获取源：{url}")
+    print()
+    print(f"正在获取源：{url}")
 
-    for attempt in range(1, RETRIES + 2):
+    for attempt in range(
+        1,
+        RETRIES + 2
+    ):
 
         try:
 
@@ -300,12 +307,11 @@ def fetch_source(url: str):
 
             if response.status_code == 200:
 
-                # 自动识别编码
-                if response.encoding is None:
-                    response.encoding = (
-                        response.apparent_encoding
-                        or "utf-8"
-                    )
+                response.encoding = (
+                    response.apparent_encoding
+                    or response.encoding
+                    or "utf-8"
+                )
 
                 print(
                     f"✓ 获取成功 "
@@ -327,9 +333,12 @@ def fetch_source(url: str):
             )
 
         if attempt <= RETRIES:
+
             time.sleep(1)
 
-    print(f"× 放弃源：{url}")
+    print(
+        f"× 放弃源：{url}"
+    )
 
     return None
 
@@ -339,12 +348,6 @@ def fetch_source(url: str):
 # ============================================================
 
 def parse_txt(content: str):
-    """
-    支持：
-
-    CCTV1,http://xxx
-    CCTV2,https://xxx
-    """
 
     streams = []
 
@@ -355,9 +358,14 @@ def parse_txt(content: str):
         if not line:
             continue
 
-        # 忽略注释
         if line.startswith("#"):
             continue
+
+        # 支持：
+        #
+        # CCTV1,http://xxx
+        # CCTV1,https://xxx
+        #
 
         match = re.match(
             r"^\s*(.+?)\s*,\s*(https?://\S+)\s*$",
@@ -396,7 +404,6 @@ def parse_txt(content: str):
 # ============================================================
 
 def parse_m3u(content: str):
-    """兼容标准 M3U / EXTINF"""
 
     streams = []
 
@@ -417,7 +424,7 @@ def parse_m3u(content: str):
 
             current_name = None
 
-            # 优先读取 tvg-name
+            # 优先 tvg-name
             match = re.search(
                 r'tvg-name\s*=\s*"([^"]+)"',
                 line,
@@ -426,15 +433,13 @@ def parse_m3u(content: str):
 
             if match:
 
-                current_name = (
-                    match.group(1).strip()
-                )
+                current_name = match.group(1)
 
-            # 没有 tvg-name 时，读取逗号后的名称
+            # 没有 tvg-name
             elif "," in line:
 
                 current_name = (
-                    line.rsplit(",", 1)[1].strip()
+                    line.rsplit(",", 1)[1]
                 )
 
             if current_name:
@@ -479,15 +484,14 @@ def parse_source(content: str):
 
     stripped = content.lstrip()
 
-    # 标准 M3U
     if stripped.upper().startswith("#EXTM3U"):
+
         return parse_m3u(content)
 
-    # 没有 EXT M3U 头但存在 EXTINF
     if "#EXTINF" in content.upper():
+
         return parse_m3u(content)
 
-    # 默认 TXT
     return parse_txt(content)
 
 
@@ -495,31 +499,36 @@ def parse_source(content: str):
 # URL 规范化
 # ============================================================
 
-def normalize_url(url: str) -> str:
+def normalize_url(url: str):
 
     return url.strip().rstrip()
 
 
 # ============================================================
 # 去重
+#
+# 重要：
+# 不再单独根据 URL 去重。
+#
+# 例如：
+#
+# CCTV5,http://abc/live
+# CCTV5+,http://abc/live
+# CCTV文化精品,http://abc/live
+#
+# 三个频道都会保留。
 # ============================================================
 
 def deduplicate_streams(streams):
-    """
-    同时进行：
-
-    1. 频道名 + URL 去重
-    2. URL 去重
-    """
 
     result = []
 
     seen = set()
-    seen_url = set()
 
     for item in streams:
 
-        name = item["program_name"]
+        name = item["program_name"].strip()
+
         url = normalize_url(
             item["stream_url"]
         )
@@ -534,14 +543,6 @@ def deduplicate_streams(streams):
 
         seen.add(key)
 
-        # 同一 URL 只保留一次
-        if url.lower() in seen_url:
-            continue
-
-        seen_url.add(
-            url.lower()
-        )
-
         result.append({
             "program_name": name,
             "stream_url": url,
@@ -551,15 +552,130 @@ def deduplicate_streams(streams):
 
 
 # ============================================================
+# 判断响应内容是否像真正的直播数据
+# ============================================================
+
+def is_live_content(
+    content_type: str,
+    data: bytes,
+    url: str
+) -> bool:
+
+    content_type = (
+        content_type or ""
+    ).lower()
+
+    url_low = url.lower()
+
+    # --------------------------------------------------------
+    # M3U8
+    # --------------------------------------------------------
+
+    if (
+        "mpegurl" in content_type
+        or "m3u8" in content_type
+        or ".m3u8" in url_low
+    ):
+
+        try:
+
+            text = data.decode(
+                "utf-8",
+                errors="ignore"
+            ).lstrip()
+
+            if (
+                "#EXTM3U" in text
+                or "#EXT-X-" in text
+            ):
+
+                return True
+
+        except Exception:
+
+            pass
+
+    # --------------------------------------------------------
+    # MPEG-TS
+    #
+    # TS 每 188 字节通常以 0x47 开始
+    # --------------------------------------------------------
+
+    if len(data) >= 188:
+
+        if data[0] == 0x47:
+
+            return True
+
+        if len(data) >= 376:
+
+            if (
+                data[0] == 0x47
+                and data[188] == 0x47
+            ):
+
+                return True
+
+            if (
+                data[0] == 0x47
+                and data[376 - 1] == 0x47
+            ):
+
+                return True
+
+    # --------------------------------------------------------
+    # FLV
+    # --------------------------------------------------------
+
+    if data.startswith(
+        b"FLV"
+    ):
+
+        return True
+
+    # --------------------------------------------------------
+    # 常见直播 Content-Type
+    # --------------------------------------------------------
+
+    live_types = [
+        "video/",
+        "audio/",
+        "application/octet-stream",
+        "application/vnd.apple.mpegurl",
+        "application/x-mpegurl",
+    ]
+
+    for item in live_types:
+
+        if item in content_type:
+
+            return True
+
+    # --------------------------------------------------------
+    # 有些服务器 Content-Type 不规范：
+    # 如果 URL 明确是 m3u8
+    # --------------------------------------------------------
+
+    if ".m3u8" in url_low:
+
+        return True
+
+    return False
+
+
+# ============================================================
 # 检测单个直播源
 # ============================================================
 
 def check_stream(item):
 
+    name = item["program_name"]
+    url = item["stream_url"]
+
     try:
 
         response = requests.get(
-            item["stream_url"],
+            url,
             headers=HEADERS,
             timeout=CHECK_TIMEOUT,
             verify=False,
@@ -569,29 +685,134 @@ def check_stream(item):
 
         status = response.status_code
 
+        # ----------------------------------------------------
+        # 严格 HTTP 模式
+        # ----------------------------------------------------
+
+        if STRICT_HTTP_200:
+
+            if status != 200:
+
+                response.close()
+
+                return (
+                    item,
+                    False,
+                    status,
+                    "HTTP"
+                )
+
+        else:
+
+            # 允许所有 2xx
+            if not (
+                200 <= status < 300
+            ):
+
+                response.close()
+
+                return (
+                    item,
+                    False,
+                    status,
+                    "HTTP"
+                )
+
+        # ----------------------------------------------------
+        # 读取少量真实数据
+        #
+        # 不下载完整视频，只读取前 8KB
+        # ----------------------------------------------------
+
+        try:
+
+            data = next(
+                response.iter_content(
+                    chunk_size=8192
+                ),
+                b""
+            )
+
+        except Exception:
+
+            data = b""
+
+        content_type = (
+            response.headers.get(
+                "Content-Type",
+                ""
+            )
+        )
+
         response.close()
 
-        # 严格模式
-        if ONLY_STATUS_200:
+        # ----------------------------------------------------
+        # 判断直播内容
+        # ----------------------------------------------------
 
-            if status == 200:
-                return item, True, status
+        if is_live_content(
+            content_type,
+            data,
+            url
+        ):
 
-            return item, False, status
+            return (
+                item,
+                True,
+                status,
+                "直播数据"
+            )
 
-        # 宽松模式
-        if 200 <= status < 400:
-            return item, True, status
+        # ----------------------------------------------------
+        # 对 HTTP 200 但无法识别内容的源
+        #
+        # CCTV / 央视源不要轻易删除。
+        #
+        # 这一步是为了避免 GitHub Actions 环境
+        # 对部分 CDN / 防盗链源误判。
+        # ----------------------------------------------------
 
-        return item, False, status
+        group = get_channel_group(
+            name
+        )
+
+        if group == "央视频道":
+
+            return (
+                item,
+                True,
+                status,
+                "央视保留"
+            )
+
+        # ----------------------------------------------------
+        # 非央视源无法识别内容则删除
+        # ----------------------------------------------------
+
+        return (
+            item,
+            False,
+            status,
+            "非直播数据"
+        )
 
     except requests.RequestException:
 
-        return item, False, 0
+        return (
+            item,
+            False,
+            0,
+            "连接失败"
+        )
 
     except Exception:
 
-        return item, False, 0
+        return (
+            item,
+            False,
+            0,
+            "检测异常"
+        )
 
 
 # ============================================================
@@ -601,17 +822,20 @@ def check_stream(item):
 def check_all_streams(streams):
 
     if not streams:
+
         return []
 
     print()
-    print("=" * 60)
+    print("=" * 70)
     print(
-        f"开始检测直播源：{len(streams)} 条"
+        f"开始检测直播源："
+        f"{len(streams)} 条"
     )
     print(
-        f"并发数量：{MAX_WORKERS}"
+        f"并发数量："
+        f"{MAX_WORKERS}"
     )
-    print("=" * 60)
+    print("=" * 70)
 
     alive = []
 
@@ -639,9 +863,12 @@ def check_all_streams(streams):
             1
         ):
 
-            item, ok, status = (
-                future.result()
-            )
+            (
+                item,
+                ok,
+                status,
+                reason,
+            ) = future.result()
 
             if ok:
 
@@ -652,7 +879,8 @@ def check_all_streams(streams):
                 print(
                     f"[{index}/{total}] ✓ "
                     f"{item['program_name']} "
-                    f"HTTP {status}"
+                    f"HTTP {status} "
+                    f"[{reason}]"
                 )
 
             else:
@@ -662,18 +890,20 @@ def check_all_streams(streams):
                 status_text = (
                     str(status)
                     if status
-                    else "连接失败"
+                    else "-"
                 )
 
                 print(
                     f"[{index}/{total}] × "
                     f"{item['program_name']} "
-                    f"HTTP {status_text}"
+                    f"HTTP {status_text} "
+                    f"[{reason}]"
                 )
 
     print()
     print(
-        f"检测完成：有效 {success} 条，"
+        f"检测完成："
+        f"有效 {success} 条，"
         f"失效 {failed} 条"
     )
 
@@ -681,22 +911,54 @@ def check_all_streams(streams):
 
 
 # ============================================================
-# 添加分类字段
+# 添加分类
 # ============================================================
 
 def organize_streams(streams):
 
     for item in streams:
 
-        item["group"] = get_channel_group(
-            item["program_name"]
+        item["group"] = (
+            get_channel_group(
+                item["program_name"]
+            )
         )
 
     return streams
 
 
 # ============================================================
-# 保存 IPTV TXT
+# 央视优先排序
+#
+# 让 M3U 中央视频道排在前面，
+# 但不改变 group-title 分类。
+# ============================================================
+
+def sort_streams(streams):
+
+    group_order = {
+        "央视频道": 0,
+        "卫视频道": 1,
+        "少儿频道": 2,
+        "地方频道": 3,
+        "其他频道": 4,
+    }
+
+    return sorted(
+        streams,
+        key=lambda item: (
+            group_order.get(
+                item["group"],
+                99
+            ),
+            item["program_name"],
+            item["stream_url"],
+        )
+    )
+
+
+# ============================================================
+# 保存 iptv.txt
 # ============================================================
 
 def save_total_txt(streams):
@@ -719,11 +981,13 @@ def save_total_txt(streams):
                 f"{item['stream_url']}\n"
             )
 
-    print(f"✓ 已生成：{path}")
+    print(
+        f"✓ 已生成：{path}"
+    )
 
 
 # ============================================================
-# 保存 IPTV M3U
+# 保存 iptv.m3u
 # ============================================================
 
 def save_m3u(streams):
@@ -739,23 +1003,37 @@ def save_m3u(streams):
         encoding="utf-8"
     ) as f:
 
-        f.write("#EXTM3U\n")
+        f.write(
+            "#EXTM3U\n"
+        )
 
         for item in streams:
 
-            name = item["program_name"]
-            group = item["group"]
-            url = item["stream_url"]
+            name = item[
+                "program_name"
+            ]
+
+            group = item[
+                "group"
+            ]
+
+            url = item[
+                "stream_url"
+            ]
 
             # 防止双引号破坏 M3U
-            safe_name = name.replace(
-                '"',
-                "'"
+            safe_name = (
+                name.replace(
+                    '"',
+                    "'"
+                )
             )
 
-            safe_group = group.replace(
-                '"',
-                "'"
+            safe_group = (
+                group.replace(
+                    '"',
+                    "'"
+                )
             )
 
             f.write(
@@ -769,7 +1047,9 @@ def save_m3u(streams):
                 f"{url}\n"
             )
 
-    print(f"✓ 已生成：{path}")
+    print(
+        f"✓ 已生成：{path}"
+    )
 
 
 # ============================================================
@@ -782,16 +1062,21 @@ def print_statistics(streams):
 
     for item in streams:
 
-        group = item["group"]
+        group = item[
+            "group"
+        ]
 
         groups[group] = (
-            groups.get(group, 0) + 1
+            groups.get(
+                group,
+                0
+            ) + 1
         )
 
     print()
-    print("=" * 60)
-    print("频道统计")
-    print("=" * 60)
+    print("=" * 70)
+    print("最终频道统计")
+    print("=" * 70)
 
     for group in [
         "央视频道",
@@ -807,13 +1092,42 @@ def print_statistics(streams):
         )
 
         if count:
+
             print(
-                f"{group}: {count}"
+                f"{group}: "
+                f"{count}"
             )
 
     print(
-        f"总计：{len(streams)} 条"
+        f"总计："
+        f"{len(streams)} 条"
     )
+
+
+# ============================================================
+# 清理旧文件
+# ============================================================
+
+def remove_old_output():
+
+    for filename in [
+        "iptv.txt",
+        "iptv.m3u",
+    ]:
+
+        path = os.path.join(
+            OUTPUT_DIR,
+            filename
+        )
+
+        if os.path.exists(path):
+
+            os.remove(path)
+
+            print(
+                f"已删除旧文件："
+                f"{path}"
+            )
 
 
 # ============================================================
@@ -822,9 +1136,9 @@ def print_statistics(streams):
 
 def main():
 
-    print("=" * 60)
-    print("IPTV 自动抓取 / 清洗 / 检测程序")
-    print("=" * 60)
+    print("=" * 70)
+    print("IPTV 自动抓取 / 清洗 / 检测")
+    print("=" * 70)
 
     os.makedirs(
         OUTPUT_DIR,
@@ -833,9 +1147,9 @@ def main():
 
     all_streams = []
 
-    # --------------------------------------------------------
-    # 分别获取并解析源
-    # --------------------------------------------------------
+    # ========================================================
+    # 分别抓取每一个源
+    # ========================================================
 
     for source_url in SOURCE_URLS:
 
@@ -844,6 +1158,7 @@ def main():
         )
 
         if not content:
+
             continue
 
         try:
@@ -853,7 +1168,7 @@ def main():
             )
 
             print(
-                f"→ 本源解析得到："
+                f"→ 本源解析："
                 f"{len(streams)} 条"
             )
 
@@ -864,8 +1179,13 @@ def main():
         except Exception as e:
 
             print(
-                f"× 解析失败：{e}"
+                f"× 解析失败："
+                f"{e}"
             )
+
+    # ========================================================
+    # 原始数量
+    # ========================================================
 
     print()
     print(
@@ -881,68 +1201,70 @@ def main():
 
         return
 
-    # --------------------------------------------------------
+    # ========================================================
     # 去重
-    # --------------------------------------------------------
+    # ========================================================
 
-    all_streams = deduplicate_streams(
-        all_streams
+    all_streams = (
+        deduplicate_streams(
+            all_streams
+        )
     )
 
     print(
-        f"去重后："
+        f"频道 + URL 去重后："
         f"{len(all_streams)} 条"
     )
 
-    # --------------------------------------------------------
-    # HTTP 检测
-    # --------------------------------------------------------
+    # ========================================================
+    # 检测
+    # ========================================================
 
     if ENABLE_CHECK:
 
-        all_streams = check_all_streams(
-            all_streams
+        all_streams = (
+            check_all_streams(
+                all_streams
+            )
         )
 
-    # --------------------------------------------------------
-    # 检测后为空
-    # --------------------------------------------------------
+    # ========================================================
+    # 检测后没有源
+    # ========================================================
 
     if not all_streams:
 
         print(
-            "❌ 检测后没有有效直播源"
+            "❌ 检测后没有有效 IPTV 源"
         )
 
-        # 清理旧输出，避免 GitHub 仓库
-        # 继续保留上一次的失效数据
-        for filename in [
-            "iptv.txt",
-            "iptv.m3u",
-        ]:
-
-            path = os.path.join(
-                OUTPUT_DIR,
-                filename
-            )
-
-            if os.path.exists(path):
-
-                os.remove(path)
+        remove_old_output()
 
         return
 
-    # --------------------------------------------------------
-    # 分类
-    # --------------------------------------------------------
+    # ========================================================
+    # 添加分类
+    # ========================================================
 
-    all_streams = organize_streams(
-        all_streams
+    all_streams = (
+        organize_streams(
+            all_streams
+        )
     )
 
-    # --------------------------------------------------------
+    # ========================================================
+    # 排序
+    # ========================================================
+
+    all_streams = (
+        sort_streams(
+            all_streams
+        )
+    )
+
+    # ========================================================
     # 只生成两个文件
-    # --------------------------------------------------------
+    # ========================================================
 
     save_total_txt(
         all_streams
@@ -952,25 +1274,27 @@ def main():
         all_streams
     )
 
-    # --------------------------------------------------------
+    # ========================================================
     # 统计
-    # --------------------------------------------------------
+    # ========================================================
 
     print_statistics(
         all_streams
     )
 
     print()
-    print("=" * 60)
-    print("✅ 全部完成")
+    print("=" * 70)
+    print("✅ IPTV 整理完成")
+    print("=" * 70)
     print(
-        "输出文件："
+        "输出："
         "output/iptv.txt"
-        "、"
+        " + "
         "output/iptv.m3u"
     )
-    print("=" * 60)
+    print("=" * 70)
 
 
 if __name__ == "__main__":
+
     main()
