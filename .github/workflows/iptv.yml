@@ -1,105 +1,113 @@
-name: Update
+name: IPTV 自动整理
 
 on:
   schedule:
-    - cron: '0 20 * * *'
+    # UTC 20:00 = 北京时间次日 04:00
+    - cron: "0 20 * * *"
+
   workflow_dispatch:
 
 permissions:
   contents: write
 
-env:
-  TZ: Asia/Shanghai
-  BRANCH: main
-
 jobs:
-  Update:
+  iptv:
+    name: 抓取并检测 IPTV
     runs-on: ubuntu-latest
-    timeout-minutes: 20
 
     steps:
-      - name: Checkout repository
+
+      # ------------------------------------------------------
+      # 检出仓库
+      # ------------------------------------------------------
+
+      - name: 检出仓库
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Get current Beijing time
-        run: |
-          echo "DATE=$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S')" >> "$GITHUB_ENV"
+      # ------------------------------------------------------
+      # 设置 Python
+      # ------------------------------------------------------
 
-      - name: Set up Python
+      - name: 设置 Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.12"
+          cache: "pip"
 
-      - name: Install dependencies
+      # ------------------------------------------------------
+      # 安装依赖
+      # ------------------------------------------------------
+
+      - name: 安装 Python 依赖
         run: |
           python -m pip install --upgrade pip
-          pip install pandas requests
+          pip install requests
 
-      - name: Run iptv generate script
-        run: |
-          python get_iptv.py
+      # ------------------------------------------------------
+      # 创建输出目录
+      # ------------------------------------------------------
 
-      - name: Check generated files
+      - name: 创建输出目录
         run: |
-          if [ ! -f iptv.txt ] || [ ! -f iptv.m3u ]; then
-            echo "错误：未生成 iptv.txt 或 iptv.m3u"
-            exit 1
+          mkdir -p output
+
+      # ------------------------------------------------------
+      # 执行 IPTV 整理
+      # ------------------------------------------------------
+
+      - name: 抓取、清洗、检测 IPTV
+        run: |
+          python .github/scripts/iptv.py
+
+      # ------------------------------------------------------
+      # 查看结果
+      # ------------------------------------------------------
+
+      - name: 查看生成结果
+        run: |
+          echo "================================"
+          echo "生成文件"
+          echo "================================"
+
+          find output -maxdepth 1 -type f -print
+
+          echo ""
+          echo "================================"
+          echo "文件大小"
+          echo "================================"
+
+          ls -lh output/
+
+          echo ""
+          echo "================================"
+          echo "频道数量"
+          echo "================================"
+
+          if [ -f output/iptv.txt ]; then
+            echo "iptv.txt：$(wc -l < output/iptv.txt) 条"
           fi
 
-          ls -lh iptv.txt iptv.m3u
-
-          TXT_LINES=$(wc -l < iptv.txt)
-          M3U_LINES=$(wc -l < iptv.m3u)
-
-          echo "iptv.txt lines: $TXT_LINES"
-          echo "iptv.m3u lines: $M3U_LINES"
-
-      - name: Skip commit if output empty
-        run: |
-          TXT_LINES=$(wc -l < iptv.txt)
-          M3U_LINES=$(wc -l < iptv.m3u)
-
-          if [ "$TXT_LINES" -eq 0 ] || [ "$M3U_LINES" -eq 0 ]; then
-            echo "生成的播放列表为空，终止工作流，不提交"
-            exit 1
+          if [ -f output/iptv.m3u ]; then
+            echo "iptv.m3u：$(grep -c '^#EXTINF' output/iptv.m3u || true) 条"
           fi
 
-      - name: Generate README.md
-        run: |
-          echo "## IPTV源自动更新" > README.md
-          echo "更新时间：${DATE}" >> README.md
-          echo "" >> README.md
-          echo "- iptv.txt：https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${BRANCH}/iptv.txt" >> README.md
-          echo "- iptv.m3u：https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${BRANCH}/iptv.m3u" >> README.md
+      # ------------------------------------------------------
+      # 提交 GitHub
+      # ------------------------------------------------------
 
-      - name: Configure Git bot identity
+      - name: 提交更新
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Commit & push files
-        run: |
-          git add iptv.txt iptv.m3u README.md
+          git add output/iptv.txt
+          git add output/iptv.m3u
 
           if git diff --cached --quiet; then
-            echo "没有文件变化，跳过提交"
-            exit 0
+            echo "没有新的变化，不提交"
+          else
+            git commit -m "自动更新 IPTV 源"
+            git push
           fi
-
-          git commit -m "Update on ${DATE}"
-
-          git pull --rebase origin "${BRANCH}"
-          git push origin "${BRANCH}"
-
-      - name: Upload artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: iptv-output
-          path: |
-            iptv.txt
-            iptv.m3u
-          if-no-files-found: warn
