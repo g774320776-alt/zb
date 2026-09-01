@@ -40,8 +40,7 @@ jobs:
 
       - name: Run iptv generate script
         run: |
-          python get_iptv.py
-          # 如果选方案2，替换上面一行：python .github/workflows/get_iptv.py
+          python .github/workflows/get_iptv.py
 
       - name: Check generated files
         run: |
