@@ -5,7 +5,9 @@ import os
 
 # 源地址列表
 urls = [
-     "http://www.52top.com.cn:678/downloads/migu.txt",
+     "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
+       "https://live.zbds.top/tv/iptv6.txt",
+       "https://live.zbds.top/tv/iptv4.txt",
 ]
 
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
