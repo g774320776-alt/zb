@@ -40,7 +40,7 @@ jobs:
 
       - name: Run iptv generate script
         run: |
-          python .github/workflows/get_iptv.py
+          python get_iptv.py
 
       - name: Check generated files
         run: |
@@ -90,6 +90,8 @@ jobs:
           fi
 
           git commit -m "Update on ${DATE}"
+
+          git pull --rebase origin "${BRANCH}"
           git push origin "${BRANCH}"
 
       - name: Upload artifact
