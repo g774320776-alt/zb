@@ -5,7 +5,7 @@ import os
 
 # 源地址列表
 urls = [
-    "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
+     "http://www.52top.com.cn:678/downloads/migu.txt",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt",
 ]
