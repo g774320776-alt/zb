@@ -2,8 +2,6 @@ import requests
 import pandas as pd
 import re
 import os
-import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # 源地址列表
 urls = [
@@ -38,12 +36,7 @@ group_priority = {
     "其他频道": 4
 }
 
-# =====================可调参数（Github Action适配）=====================
 MAX_SOURCE_PER_CHANNEL = 3   # 每个频道最多保留3个源
-SPEED_TEST_TIMEOUT = 4       # 测速超时，github网络差调大到4秒
-MAX_WORKERS = 10             # 并发线程，github不要超过10，太高会大量超时
-USE_HEAD_TEST = True         # 使用HEAD请求测速，速度更快
-# ======================================================================
 
 
 def clean_old_files():
@@ -146,42 +139,11 @@ def parse_txt(content):
             p_name = clean_program_name(match.group(1).strip())
             p_url = match.group(2).strip()
             if p_name and p_url.startswith("http") and not is_bad_name(p_name):
-                streams.append({"program_name": p_name, "stream_url": p_url})
+                streams.append({
+                    "program_name": p_name,
+                    "stream_url": p_url
+                })
     return streams
-
-
-def test_single_url(url):
-    start = time.perf_counter()
-    try:
-        if USE_HEAD_TEST:
-            resp = requests.head(url, headers=HEADERS, timeout=SPEED_TEST_TIMEOUT, allow_redirects=True)
-        else:
-            resp = requests.get(url, headers=HEADERS, timeout=SPEED_TEST_TIMEOUT, stream=True)
-        resp.close()
-        cost_ms = round((time.perf_counter() - start) * 1000, 0)
-        return url, cost_ms, True
-    except Exception:
-        return url, 9999, False
-
-
-def speed_test_df(df):
-    print(f"\n🚀开始测速，共 {len(df)} 个链接，并发:{MAX_WORKERS}...")
-    url_list = df["stream_url"].tolist()
-    speed_map = {}
-
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_to_url = {executor.submit(test_single_url, u): u for u in url_list}
-        for fut in as_completed(future_to_url):
-            u, cost, alive = fut.result()
-            speed_map[u] = {"cost_ms": cost, "alive": alive}
-
-    df["cost_ms"] = df["stream_url"].apply(lambda x: speed_map[x]["cost_ms"])
-    df["alive"] = df["stream_url"].apply(lambda x: speed_map[x]["alive"])
-
-    alive_cnt = df["alive"].sum()
-    print(f"✅测速完成：存活 {alive_cnt} / {len(df)}")
-    df = df[df["alive"]].copy()
-    return df
 
 
 def organize_streams(content):
@@ -191,30 +153,26 @@ def organize_streams(content):
     if df.empty:
         return df
 
+    # 去重
     df = df.drop_duplicates(subset=['program_name', 'stream_url'], keep="first")
     df = df[df['program_name'].str.len() > 0]
     df = df[df['stream_url'].str.len() > 0]
+
     df['group'] = df['program_name'].apply(get_channel_group)
     df["group_sort"] = df["group"].map(group_priority)
     df["cctv_num_sort"] = df["program_name"].apply(get_cctv_sort_key)
-    df = df.sort_values(by=["group_sort", "cctv_num_sort", "program_name"], ascending=[True, True, True])
-    df = df.reset_index(drop=True)
 
-    df = speed_test_df(df)
-    if df.empty:
-        return df
-
+    # 每个频道最多保留MAX_SOURCE_PER_CHANNEL个源
     out_rows = []
-    # 循环分组，彻底规避pandas低版本groupby.apply丢列bug
     for _, group in df.groupby("program_name"):
-        group_sorted = group.sort_values("cost_ms", ascending=True)
-        take = group_sorted.head(MAX_SOURCE_PER_CHANNEL)
+        take = group.head(MAX_SOURCE_PER_CHANNEL)
         out_rows.extend(take.to_dict("records"))
 
     df = pd.DataFrame(out_rows)
     if df.empty:
         return df
 
+    # 整体排序
     df = df.sort_values(by=["group_sort", "cctv_num_sort", "program_name"], ascending=[True, True, True])
     cctv_df = df[df['group'] == "央视频道"]
     print(f"\n🔍解析到央视频道数量：{len(cctv_df)}")
@@ -263,6 +221,6 @@ if __name__ == "__main__":
             save_to_m3u(df_result)
             print(f"\n✅全部完成！共 {len(df_result)} 条直播流")
         else:
-            print("❌测速后没有存活有效节目")
+            print("❌没有有效节目")
     else:
         print("❌未能获取有效数据")
