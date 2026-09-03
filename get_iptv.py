@@ -3,12 +3,9 @@ import pandas as pd
 import re
 import os
 
-# 源列表：范明明优先 -> 同类github源 -> zbds兜底；全部加ghproxy代理
+# =========改动：范明明源放在第一位，优先抓取=========
 urls = [
-    "https://ghp.ci/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
-    "https://ghp.ci/https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u",
-    "https://ghp.ci/https://raw.githubusercontent.com/YueChan/Live/main/APTV.m3u",
-    "https://ghp.ci/https://raw.githubusercontent.com/vv314/iptv/main/IPTV.m3u",
+    "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt"
 ]
@@ -71,7 +68,7 @@ def get_channel_group(name: str):
         return "央视频道"
     if "卫视" in name:
         return "卫视频道"
-    # 地方台/其他全部丢弃
+    # 地方台、其他全部返回None直接丢弃
     return None
 
 
@@ -162,7 +159,7 @@ def organize_streams(content):
     df['group'] = df['program_name'].apply(get_channel_group)
     df = df[df["group"].notna()]
 
-    # 按频道名去重，保留最先出现(优先级高)的源
+    # =========关键：按频道名称去重，keep=first，范明明先抓取，同名优先保留他的源=========
     df = df.drop_duplicates(subset=["program_name"], keep="first")
 
     df["group_sort"] = df["group"].map(group_priority)
