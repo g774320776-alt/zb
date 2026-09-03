@@ -36,8 +36,6 @@ group_priority = {
     "其他频道": 4
 }
 
-MAX_SOURCE_PER_CHANNEL = 3   # 每个频道最多保留3个源
-
 
 def clean_old_files():
     print("\n🧹正在清理旧输出文件...")
@@ -153,7 +151,7 @@ def organize_streams(content):
     if df.empty:
         return df
 
-    # 去重
+    # 去重：频道+链接完全相同才删除
     df = df.drop_duplicates(subset=['program_name', 'stream_url'], keep="first")
     df = df[df['program_name'].str.len() > 0]
     df = df[df['stream_url'].str.len() > 0]
@@ -162,18 +160,10 @@ def organize_streams(content):
     df["group_sort"] = df["group"].map(group_priority)
     df["cctv_num_sort"] = df["program_name"].apply(get_cctv_sort_key)
 
-    # 每个频道最多保留MAX_SOURCE_PER_CHANNEL个源
-    out_rows = []
-    for _, group in df.groupby("program_name"):
-        take = group.head(MAX_SOURCE_PER_CHANNEL)
-        out_rows.extend(take.to_dict("records"))
-
-    df = pd.DataFrame(out_rows)
-    if df.empty:
-        return df
-
-    # 整体排序
+    # 整体排序：分组 > cctv编号 > 频道名，全部源保留，不再做head截断
     df = df.sort_values(by=["group_sort", "cctv_num_sort", "program_name"], ascending=[True, True, True])
+    df = df.reset_index(drop=True)
+
     cctv_df = df[df['group'] == "央视频道"]
     print(f"\n🔍解析到央视频道数量：{len(cctv_df)}")
     return df
