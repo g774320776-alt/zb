@@ -3,11 +3,11 @@ import pandas as pd
 import re
 import os
 
-# 源地址列表
+# 源地址列表，新增 fanmingming ipv6.m3u
 urls = [
-    "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt",
+    "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u"
 ]
 
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
@@ -52,7 +52,10 @@ def clean_old_files():
 def get_cctv_sort_key(name: str):
     m = re.search(r"CCTV[-‑]?(\d+)", name.upper())
     if m:
-        return int(m.group(1))
+        try:
+            return int(m.group(1))
+        except ValueError:
+            pass
     return 999
 
 
@@ -155,17 +158,28 @@ def organize_streams(content):
     df = df.drop_duplicates(subset=['program_name', 'stream_url'], keep="first")
     df = df[df['program_name'].str.len() > 0]
     df = df[df['stream_url'].str.len() > 0]
+    # 过滤无效链接
+    df = df[df["stream_url"].str.match(r"^http")]
 
     df['group'] = df['program_name'].apply(get_channel_group)
     df["group_sort"] = df["group"].map(group_priority)
     df["cctv_num_sort"] = df["program_name"].apply(get_cctv_sort_key)
 
-    # 整体排序：分组 > cctv编号 > 频道名，全部源保留，不再做head截断
+    # 整体排序：分组 > cctv编号 > 频道名
     df = df.sort_values(by=["group_sort", "cctv_num_sort", "program_name"], ascending=[True, True, True])
     df = df.reset_index(drop=True)
 
     cctv_df = df[df['group'] == "央视频道"]
-    print(f"\n🔍解析到央视频道数量：{len(cctv_df)}")
+    wt_df = df[df['group'] == "卫视频道"]
+    kid_df = df[df['group'] == "少儿频道"]
+    local_df = df[df['group'] == "地方频道"]
+    other_df = df[df['group'] == "其他频道"]
+    print(f"\n🔍解析统计：")
+    print(f"央视频道：{len(cctv_df)}")
+    print(f"卫视频道：{len(wt_df)}")
+    print(f"少儿频道：{len(kid_df)}")
+    print(f"地方频道：{len(local_df)}")
+    print(f"其他频道：{len(other_df)}")
     return df
 
 
@@ -179,6 +193,9 @@ def save_to_total_txt(df, filename="iptv.txt"):
             ipv4.append(f"{program},{url}")
         elif ipv6_pattern.match(url):
             ipv6.append(f"{program},{url}")
+        else:
+            # 不属于ipv4/ipv6的http链接放到ipv4块
+            ipv4.append(f"{program},{url}")
 
     with open(filename, 'w', encoding='utf-8') as f:
         f.write("# IPv4 Streams\n")
