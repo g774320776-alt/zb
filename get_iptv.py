@@ -23,6 +23,42 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
+# 需要自动清理的旧输出文件列表
+old_output_files = [
+    "iptv.txt",
+    "iptv.m3u"
+]
+
+# 分组排序优先级
+group_priority = {
+    "央视频道": 0,
+    "卫视频道": 1,
+    "少儿频道": 2,
+    "地方频道": 3,
+    "其他频道": 4
+}
+
+
+def clean_old_files():
+    """自动清理旧输出文件"""
+    print("\n🧹正在清理旧输出文件...")
+    for fpath in old_output_files:
+        if os.path.exists(fpath):
+            try:
+                os.remove(fpath)
+                print(f"已删除旧文件: {fpath}")
+            except Exception as e:
+                print(f"删除文件 {fpath} 失败: {e}")
+    print()
+
+
+def get_cctv_sort_key(name: str):
+    """提取CCTV后面数字用于排序，无数字返回999放末尾"""
+    m = re.search(r"CCTV[-‑]?(\d+)", name.upper())
+    if m:
+        return int(m.group(1))
+    return 999
+
 
 def get_channel_group(name: str) -> str:
     """根据频道名判断分组【修复CCTV识别】"""
@@ -35,7 +71,7 @@ def get_channel_group(name: str) -> str:
         if k in name:
             return "少儿频道"
 
-    # 央视频道：包含CCTV 或者 央视，就算CCTV后面数字被洗掉也识别
+    # 央视频道：包含CCTV 或者 央视
     name_upper = name.upper()
     if "CCTV" in name_upper or "央视" in name:
         return "央视频道"
@@ -49,13 +85,13 @@ def get_channel_group(name: str) -> str:
 
 
 def clean_program_name(name: str) -> str:
-    """清洗节目名称【关键修复：不会删除CCTV‑1的数字编号】"""
+    """清洗节目名称，保留CCTV‑1数字编号"""
     if not name:
         return ""
     # 去除特殊表情符号
     name = re.sub(r'[★✨🔴💥🔥⚡]', '', name)
     name = re.sub(r'\s+', ' ', name)
-    # 只清除末尾的高清/超清/4K/HD等后缀，**不再清除 "-数字"，避免破坏CCTV‑1**
+    # 只清除末尾的高清/超清/4K/HD等后缀
     name = re.sub(r'\s*(高清|超清|标清|HD|SD|4K|2K)$', '', name, flags=re.IGNORECASE)
     name = name.strip()
     return name
@@ -98,14 +134,15 @@ def parse_m3u(content):
     streams = []
     current_program = None
     for line in content.splitlines():
+        line = line.strip()
         if line.startswith("#EXTINF"):
             match = re.search(r'tvg-name="([^"]+)"', line)
             if match:
                 current_program = clean_program_name(match.group(1).strip())
         elif line.startswith("http"):
             if current_program and not is_bad_name(current_program):
-                streams.append({"program_name": current_program, "stream_url": line.strip()})
-                current_program = None
+                streams.append({"program_name": current_program, "stream_url": line})
+            current_program = None  # 解析完链接立刻清空，修复错乱问题
     return streams
 
 
@@ -126,7 +163,7 @@ def parse_txt(content):
 
 
 def organize_streams(content):
-    parser = parse_m3u if content.startswith("#EXTM3U") else parse_txt
+    parser = parse_m3u if content.lstrip().startswith("#EXTM3U") else parse_txt
     raw = parser(content)
     df = pd.DataFrame(raw)
     if df.empty:
@@ -135,17 +172,22 @@ def organize_streams(content):
     df = df.drop_duplicates(subset=['program_name', 'stream_url'], keep="first")
     df = df[df['program_name'].str.len() > 0]
     df = df[df['stream_url'].str.len() > 0]
-    # 计算分组字段
     df['group'] = df['program_name'].apply(get_channel_group)
 
-    # 调试输出：打印央视数量
+    # 排序字段
+    df["group_sort"] = df["group"].map(group_priority)
+    df["cctv_num_sort"] = df["program_name"].apply(get_cctv_sort_key)
+    # 先按分组，再按cctv数字，再频道名称
+    df = df.sort_values(by=["group_sort", "cctv_num_sort", "program_name"], ascending=[True, True, True])
+    df = df.reset_index(drop=True)
+
     cctv_df = df[df['group'] == "央视频道"]
     print(f"\n🔍解析到央视频道数量：{len(cctv_df)}")
     return df
 
 
 def save_to_total_txt(df, filename="iptv.txt"):
-    """保存总txt文件，区分IPv4/IPv6"""
+    """保存总txt文件，区分IPv4/IPv6，保持已经排好的顺序"""
     ipv4 = []
     ipv6 = []
     for _, row in df.iterrows():
@@ -164,31 +206,6 @@ def save_to_total_txt(df, filename="iptv.txt"):
     print(f"总文本文件已保存: {os.path.abspath(filename)}")
 
 
-def save_split_txt(df):
-    """按分组输出独立txt文件，每个文件内部分IPv4/IPv6"""
-    group_list = ["央视频道", "卫视频道", "少儿频道", "地方频道", "其他频道"]
-    for g_name in group_list:
-        sub_df = df[df["group"] == g_name]
-        if sub_df.empty:
-            print(f"分组【{g_name}】无数据，跳过")
-            continue
-        ipv4 = []
-        ipv6 = []
-        for _, row in sub_df.iterrows():
-            line = f"{row['program_name']},{row['stream_url']}"
-            if ipv4_pattern.match(row['stream_url']):
-                ipv4.append(line)
-            elif ipv6_pattern.match(row['stream_url']):
-                ipv6.append(line)
-        filename = f"{g_name}.txt"
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write("# IPv4\n")
-            f.write("\n".join(ipv4))
-            f.write("\n\n# IPv6\n")
-            f.write("\n".join(ipv6))
-        print(f"分类文件已保存: {os.path.abspath(filename)}")
-
-
 def save_to_m3u(df, filename="iptv.m3u"):
     with open(filename, 'w', encoding='utf-8', newline='') as f:
         f.write("#EXTM3U\n")
@@ -201,6 +218,9 @@ def save_to_m3u(df, filename="iptv.m3u"):
 
 
 if __name__ == "__main__":
+    # 第一步：清理旧文件
+    clean_old_files()
+
     print("开始抓取所有源...")
     content = fetch_all_streams()
     if content:
@@ -208,7 +228,6 @@ if __name__ == "__main__":
         df_result = organize_streams(content)
         if not df_result.empty:
             save_to_total_txt(df_result)
-            save_split_txt(df_result)
             save_to_m3u(df_result)
             print(f"\n✅全部完成！共 {len(df_result)} 条直播流")
         else:
