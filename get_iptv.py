@@ -3,17 +3,16 @@ import pandas as pd
 import re
 import os
 
-# 源地址列表，新增 fanmingming ipv6.m3u
+# =========改动：范明明源放在第一位，优先抓取=========
 urls = [
+    "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
     "https://live.zbds.top/tv/iptv6.txt",
-    "https://live.zbds.top/tv/iptv4.txt",
-    "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u"
+    "https://live.zbds.top/tv/iptv4.txt"
 ]
 
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
 ipv6_pattern = re.compile(r'^http://\[([a-fA-F0-9:]+)\]')
 
-# 广告/垃圾关键词过滤
 ban_words = [
     "广告", "购物", "测试", "垃圾", "备用源", "vip", "付费",
     "游戏", "棋牌", "成人", "解密", "高清备用", "直播源分享"
@@ -31,9 +30,7 @@ old_output_files = [
 group_priority = {
     "央视频道": 0,
     "卫视频道": 1,
-    "少儿频道": 2,
-    "地方频道": 3,
-    "其他频道": 4
+    "少儿频道": 2
 }
 
 
@@ -59,9 +56,9 @@ def get_cctv_sort_key(name: str):
     return 999
 
 
-def get_channel_group(name: str) -> str:
+def get_channel_group(name: str):
     if not name:
-        return "其他频道"
+        return None
     kid_keywords = ["少儿", "动画", "卡通", "金鹰卡通", "卡酷少儿", "优漫卡通"]
     for k in kid_keywords:
         if k in name:
@@ -71,7 +68,8 @@ def get_channel_group(name: str) -> str:
         return "央视频道"
     if "卫视" in name:
         return "卫视频道"
-    return "地方频道"
+    # 地方台、其他全部返回None直接丢弃
+    return None
 
 
 def clean_program_name(name: str) -> str:
@@ -154,32 +152,29 @@ def organize_streams(content):
     if df.empty:
         return df
 
-    # 去重：频道+链接完全相同才删除
-    df = df.drop_duplicates(subset=['program_name', 'stream_url'], keep="first")
     df = df[df['program_name'].str.len() > 0]
     df = df[df['stream_url'].str.len() > 0]
-    # 过滤无效链接
     df = df[df["stream_url"].str.match(r"^http")]
 
     df['group'] = df['program_name'].apply(get_channel_group)
+    df = df[df["group"].notna()]
+
+    # =========关键：按频道名称去重，keep=first，范明明先抓取，同名优先保留他的源=========
+    df = df.drop_duplicates(subset=["program_name"], keep="first")
+
     df["group_sort"] = df["group"].map(group_priority)
     df["cctv_num_sort"] = df["program_name"].apply(get_cctv_sort_key)
 
-    # 整体排序：分组 > cctv编号 > 频道名
     df = df.sort_values(by=["group_sort", "cctv_num_sort", "program_name"], ascending=[True, True, True])
     df = df.reset_index(drop=True)
 
     cctv_df = df[df['group'] == "央视频道"]
     wt_df = df[df['group'] == "卫视频道"]
     kid_df = df[df['group'] == "少儿频道"]
-    local_df = df[df['group'] == "地方频道"]
-    other_df = df[df['group'] == "其他频道"]
     print(f"\n🔍解析统计：")
     print(f"央视频道：{len(cctv_df)}")
     print(f"卫视频道：{len(wt_df)}")
     print(f"少儿频道：{len(kid_df)}")
-    print(f"地方频道：{len(local_df)}")
-    print(f"其他频道：{len(other_df)}")
     return df
 
 
@@ -194,7 +189,6 @@ def save_to_total_txt(df, filename="iptv.txt"):
         elif ipv6_pattern.match(url):
             ipv6.append(f"{program},{url}")
         else:
-            # 不属于ipv4/ipv6的http链接放到ipv4块
             ipv4.append(f"{program},{url}")
 
     with open(filename, 'w', encoding='utf-8') as f:
