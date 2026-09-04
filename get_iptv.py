@@ -35,10 +35,11 @@ CHANNEL_WHITELIST = [
     "卫视"
 ]
 
-# 抓取源列表
+# 抓取源列表：migu放第一位，范明明放到第三位
 urls = [
-    "https://ghproxy.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
+    "http://www.52top.com.cn:678/downloads/migu.txt",
     "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
+    "https://ghproxy.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt",
 ]
