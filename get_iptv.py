@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import re
 import os
+from pypinyin import lazy_pinyin
 
 # ====================== 【自定义配置区】 ======================
 # 优先频道顺序：越靠前输出越优先
@@ -54,19 +55,8 @@ def clean_text(text: str) -> str:
     """清理文本中隐形特殊Unicode字符"""
     return clean_char_pattern.sub('', text)
 
-def natural_sort_str(s):
-    """自然排序，解决CCTV‑10排在CCTV‑2前面问题"""
-    parts = re.split(r'(\d+)', s)
-    key_parts = []
-    for p in parts:
-        if p.isdigit():
-            key_parts.append(f"{int(p):06d}")
-        else:
-            key_parts.append(p.lower())
-    return "|".join(key_parts)
-
 def get_priority_score(channel_name):
-    """频道优先级分数，数字越小越靠前"""
+    """手动优先列表，匹配到返回序号，没匹配返回9999"""
     for idx, keyword in enumerate(PRIORITY_CHANNELS):
         if keyword in channel_name:
             return idx
@@ -79,6 +69,17 @@ def get_group_name(channel_name):
     elif "卫视" in channel_name:
         return "卫视频道"
     return "其他"
+
+def parse_cctv_num(name):
+    """提取CCTV后面数字，用于央视排序，返回数字；非CCTV返回999"""
+    m = re.search(r'CCTV\D*(\d+)', name.upper())
+    if m:
+        return int(m.group(1))
+    return 999
+
+def get_pinyin_sort(name):
+    """获取拼音，用于未配置卫视的自动排序"""
+    return "".join(lazy_pinyin(name))
 
 def is_keep_channel(channel_name, stream_url):
     """过滤：只保留白名单（CCTV / 卫视）"""
@@ -93,10 +94,10 @@ def fetch_streams_from_url(url):
     print(f"正在爬取网站源: {url}")
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            "User‑Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
         response = requests.get(url, headers=headers, timeout=15)
-        response.encoding = 'utf-8'
+        response.encoding = 'utf‑8'
         if response.status_code == 200:
             raw = response.text
             return clean_text(raw)
@@ -126,7 +127,7 @@ def parse_content(content):
             continue
 
         if line.startswith("#EXTINF"):
-            match = re.search(r'tvg-name="([^"]+)"', line)
+            match = re.search(r'tvg‑name="([^"]+)"', line)
             if match:
                 current_program = match.group(1).strip()
             continue
@@ -159,27 +160,32 @@ def organize_streams(content):
     df = df.drop_duplicates(subset=['program_name', 'stream_url'])
     print(f"过滤后总频道链接数: {len(df)}")
 
-    # 分组合并链接
     grouped = df.groupby('program_name')['stream_url'].apply(list).reset_index()
-    # 增加分组字段
     grouped['group'] = grouped['program_name'].apply(get_group_name)
     grouped['priority'] = grouped['program_name'].apply(get_priority_score)
-    grouped['sort_key'] = grouped['program_name'].apply(natural_sort_str)
-    # 先按分组，再按优先级排序
+    grouped['cctv_no'] = grouped['program_name'].apply(parse_cctv_num)
+    grouped['pinyin'] = grouped['program_name'].apply(get_pinyin_sort)
+
+    # 分组顺序：央视频道0，卫视频道1
     group_order = {"央视频道":0, "卫视频道":1}
     grouped["group_order"] = grouped["group"].map(group_order)
-    grouped = grouped.sort_values(by=["group_order","priority", "sort_key"], ascending=[True,True,True])
-    grouped = grouped.drop(columns=["priority", "sort_key","group_order"]).reset_index(drop=True)
-    print(f"✅完成频道分组与排序")
+
+    # 排序规则：
+    # 1.分组；2.手动优先列表；3.cctv数字；4.拼音兜底
+    grouped = grouped.sort_values(
+        by=["group_order", "priority", "cctv_no", "pinyin"],
+        ascending=[True, True, True, True]
+    )
+    grouped = grouped.drop(columns=["priority", "cctv_no", "pinyin", "group_order"]).reset_index(drop=True)
+    print(f"✅完成优化排序")
     return grouped
 
 
 def save_to_txt(grouped_streams, filename="iptv.txt"):
-    # 拆分两组
     cctv_rows = grouped_streams[grouped_streams["group"]=="央视频道"]
     ws_rows = grouped_streams[grouped_streams["group"]=="卫视频道"]
 
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, 'w', encoding='utf‑8') as f:
         f.write("# 央视频道\n")
         for _, row in cctv_rows.iterrows():
             program = row['program_name']
@@ -191,23 +197,31 @@ def save_to_txt(grouped_streams, filename="iptv.txt"):
             for url in row['stream_url']:
                 f.write(f"{program},{url}\n")
     print(f"✅文本文件已保存: {os.path.abspath(filename)}")
-    print(f"  央视频道链接数: {len(cctv_rows)}")
-    print(f"  卫视频道链接数: {len(ws_rows)}")
+    print(f"  央视频道数量: {len(cctv_rows)}")
+    print(f"  卫视频道数量: {len(ws_rows)}")
 
 
 def save_to_m3u(grouped_streams, filename="iptv.m3u"):
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, 'w', encoding='utf‑8') as f:
         f.write("#EXTM3U\n")
         for _, row in grouped_streams.iterrows():
             program = row['program_name']
             group = row['group']
             for url in row['stream_url']:
-                # group-title 实现播放器分组
-                f.write(f'#EXTINF:-1 tvg-name="{program}" group-title="{group}",{program}\n{url}\n')
+                f.write(f'#EXTINF:-1 tvg‑name="{program}" group‑title="{group}",{program}\n{url}\n')
     print(f"✅M3U文件已保存: {os.path.abspath(filename)}")
 
 
+def clean_old_files():
+    """提前删除旧的 iptv.txt、iptv.m3u"""
+    for file in ["iptv.txt", "iptv.m3u"]:
+        if os.path.exists(file):
+            os.remove(file)
+            print(f"🗑️已删除旧文件: {file}")
+
+
 if __name__ == "__main__":
+    clean_old_files()
     print("===== IPTV源抓取开始 =====")
     full_content = fetch_all_streams()
     if full_content and len(full_content.strip()) > 20:
