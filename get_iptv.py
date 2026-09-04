@@ -159,8 +159,8 @@ def organize_streams(content):
     df['group'] = df['program_name'].apply(get_channel_group)
     df = df[df["group"].notna()]
 
-    # =========关键：按频道名称去重，keep=first，范明明先抓取，同名优先保留他的源=========
-    df = df.drop_duplicates(subset=["program_name"], keep="first")
+    # =========修改：不再按节目名去重！只按url去重，相同链接删掉，同名不同链接保留多源=========
+    df = df.drop_duplicates(subset=["stream_url"], keep="first")
 
     df["group_sort"] = df["group"].map(group_priority)
     df["cctv_num_sort"] = df["program_name"].apply(get_cctv_sort_key)
