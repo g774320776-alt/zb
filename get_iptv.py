@@ -28,8 +28,7 @@ PRIORITY_CHANNELS = [
     "广东卫视"
 ]
 
-# 【强制：只保留 CCTV 和 卫视，其余全部丢弃】
-# 白名单开关打开，只有名称包含CCTV 或者 卫视 的频道才会保留
+# 只保留 CCTV 和 卫视频道
 ENABLE_WHITELIST = True
 CHANNEL_WHITELIST = [
     "CCTV",
@@ -73,10 +72,17 @@ def get_priority_score(channel_name):
             return idx
     return 9999
 
+def get_group_name(channel_name):
+    """获取分组名称：央视频道 / 卫视频道"""
+    if "CCTV" in channel_name.upper():
+        return "央视频道"
+    elif "卫视" in channel_name:
+        return "卫视频道"
+    return "其他"
+
 def is_keep_channel(channel_name, stream_url):
     """过滤：只保留白名单（CCTV / 卫视）"""
     name = channel_name.lower()
-    # 白名单模式：频道包含CCTV 或者 卫视才保留
     if ENABLE_WHITELIST:
         hit = any(kw.lower() in name for kw in CHANNEL_WHITELIST)
         if not hit:
@@ -153,36 +159,40 @@ def organize_streams(content):
     df = df.drop_duplicates(subset=['program_name', 'stream_url'])
     print(f"过滤后总频道链接数: {len(df)}")
 
+    # 分组合并链接
     grouped = df.groupby('program_name')['stream_url'].apply(list).reset_index()
-
+    # 增加分组字段
+    grouped['group'] = grouped['program_name'].apply(get_group_name)
     grouped['priority'] = grouped['program_name'].apply(get_priority_score)
     grouped['sort_key'] = grouped['program_name'].apply(natural_sort_str)
-    grouped = grouped.sort_values(by=["priority", "sort_key"], ascending=[True, True])
-    grouped = grouped.drop(columns=["priority", "sort_key"]).reset_index(drop=True)
-    print(f"✅完成频道排序")
+    # 先按分组，再按优先级排序
+    group_order = {"央视频道":0, "卫视频道":1}
+    grouped["group_order"] = grouped["group"].map(group_order)
+    grouped = grouped.sort_values(by=["group_order","priority", "sort_key"], ascending=[True,True,True])
+    grouped = grouped.drop(columns=["priority", "sort_key","group_order"]).reset_index(drop=True)
+    print(f"✅完成频道分组与排序")
     return grouped
 
 
 def save_to_txt(grouped_streams, filename="iptv.txt"):
-    ipv4 = []
-    ipv6 = []
-
-    for _, row in grouped_streams.iterrows():
-        program = row['program_name']
-        for url in row['stream_url']:
-            if ipv4_pattern.match(url):
-                ipv4.append(f"{program},{url}")
-            elif ipv6_pattern.match(url):
-                ipv6.append(f"{program},{url}")
+    # 拆分两组
+    cctv_rows = grouped_streams[grouped_streams["group"]=="央视频道"]
+    ws_rows = grouped_streams[grouped_streams["group"]=="卫视频道"]
 
     with open(filename, 'w', encoding='utf-8') as f:
-        f.write("# IPv4 Streams\n")
-        f.write("\n".join(ipv4))
-        f.write("\n\n# IPv6 Streams\n")
-        f.write("\n".join(ipv6))
+        f.write("# 央视频道\n")
+        for _, row in cctv_rows.iterrows():
+            program = row['program_name']
+            for url in row['stream_url']:
+                f.write(f"{program},{url}\n")
+        f.write("\n# 卫视频道\n")
+        for _, row in ws_rows.iterrows():
+            program = row['program_name']
+            for url in row['stream_url']:
+                f.write(f"{program},{url}\n")
     print(f"✅文本文件已保存: {os.path.abspath(filename)}")
-    print(f"  IPv4频道数量: {len(ipv4)}")
-    print(f"  IPv6频道数量: {len(ipv6)}")
+    print(f"  央视频道链接数: {len(cctv_rows)}")
+    print(f"  卫视频道链接数: {len(ws_rows)}")
 
 
 def save_to_m3u(grouped_streams, filename="iptv.m3u"):
@@ -190,8 +200,10 @@ def save_to_m3u(grouped_streams, filename="iptv.m3u"):
         f.write("#EXTM3U\n")
         for _, row in grouped_streams.iterrows():
             program = row['program_name']
+            group = row['group']
             for url in row['stream_url']:
-                f.write(f'#EXTINF:-1 tvg-name="{program}",{program}\n{url}\n')
+                # group-title 实现播放器分组
+                f.write(f'#EXTINF:-1 tvg-name="{program}" group-title="{group}",{program}\n{url}\n')
     print(f"✅M3U文件已保存: {os.path.abspath(filename)}")
 
 
