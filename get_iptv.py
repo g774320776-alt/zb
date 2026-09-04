@@ -2,7 +2,6 @@ import requests
 import pandas as pd
 import re
 import os
-from pypinyin import lazy_pinyin
 
 # ====================== 【自定义配置区】 ======================
 # 优先频道顺序：越靠前输出越优先
@@ -48,8 +47,8 @@ urls = [
 pd.options.mode.chained_assignment = None
 
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
-ipv6_pattern = re.compile(r'^http://\[([a-fA-F0-9:]+)\]')
-clean_char_pattern = re.compile(r'[^\x00-\x7E\u4e00-\u9fff]')
+ipv6_pattern = re.compile(r'^http://\[([a‑fA‑F0‑9:]+)\]')
+clean_char_pattern = re.compile(r'[^\x00‑\x7E\u4e00‑\u9fff]')
 
 def clean_text(text: str) -> str:
     """清理文本中隐形特殊Unicode字符"""
@@ -76,10 +75,6 @@ def parse_cctv_num(name):
     if m:
         return int(m.group(1))
     return 999
-
-def get_pinyin_sort(name):
-    """获取拼音，用于未配置卫视的自动排序"""
-    return "".join(lazy_pinyin(name))
 
 def is_keep_channel(channel_name, stream_url):
     """过滤：只保留白名单（CCTV / 卫视）"""
@@ -164,19 +159,17 @@ def organize_streams(content):
     grouped['group'] = grouped['program_name'].apply(get_group_name)
     grouped['priority'] = grouped['program_name'].apply(get_priority_score)
     grouped['cctv_no'] = grouped['program_name'].apply(parse_cctv_num)
-    grouped['pinyin'] = grouped['program_name'].apply(get_pinyin_sort)
 
     # 分组顺序：央视频道0，卫视频道1
     group_order = {"央视频道":0, "卫视频道":1}
     grouped["group_order"] = grouped["group"].map(group_order)
 
-    # 排序规则：
-    # 1.分组；2.手动优先列表；3.cctv数字；4.拼音兜底
+    # 排序规则：分组 > 手动优先列表 > cctv数字 > 频道名称字符串排序
     grouped = grouped.sort_values(
-        by=["group_order", "priority", "cctv_no", "pinyin"],
+        by=["group_order", "priority", "cctv_no", "program_name"],
         ascending=[True, True, True, True]
     )
-    grouped = grouped.drop(columns=["priority", "cctv_no", "pinyin", "group_order"]).reset_index(drop=True)
+    grouped = grouped.drop(columns=["priority", "cctv_no", "group_order"]).reset_index(drop=True)
     print(f"✅完成优化排序")
     return grouped
 
