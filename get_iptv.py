@@ -16,7 +16,7 @@ urls = [
 ]
 
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
-ipv6_pattern = re.compile(r'^http://\[([a-fA-F0-9:]+)\]')
+ipv6_pattern = re.compile(r'^http://\[([a‑fA‑F0‑9:]+)\]')
 
 ban_words = [
     "广告", "购物", "测试", "垃圾", "备用源", "vip", "付费",
@@ -24,7 +24,7 @@ ban_words = [
 ]
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    "User‑Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
 old_output_files = [
@@ -100,7 +100,7 @@ def fetch_streams_from_url(url, retries=2):
     for attempt in range(retries):
         try:
             response = requests.get(url, headers=HEADERS, timeout=15)
-            response.encoding = 'utf-8'
+            response.encoding = 'utf‑8'
             if response.status_code == 200:
                 return response.text.replace('\r', '')
             print(f"第{attempt+1}次请求 {url} 状态码:{response.status_code}")
@@ -116,7 +116,7 @@ def parse_m3u(content):
     for line in content.splitlines():
         line = line.strip()
         if line.startswith("#EXTINF"):
-            match = re.search(r'tvg-name="([^"]+)"', line)
+            match = re.search(r'tvg‑name="([^"]+)"', line)
             if match:
                 current_program = clean_program_name(match.group(1).strip())
         elif line.startswith("http"):
@@ -162,7 +162,7 @@ def fetch_all_streams():
 
 
 def organize_streams(raw_list):
-    df = pd.DataFrame(raw_list)
+    df = pd.DataFrame(raw_list, columns=["program_name", "stream_url"])
     if df.empty:
         return df
 
@@ -179,35 +179,39 @@ def organize_streams(raw_list):
     df["group_sort"] = df["group"].map(group_priority)
     df["cctv_num_sort"] = df["program_name"].apply(get_cctv_sort_key)
 
-    # 先整体排序：分组 > cctv数字 > 频道名
-    df = df.sort_values(by=["group_sort", "cctv_num_sort", "program_name"], ascending=[True, True, True])
+    # ==========关键修复：不破坏频道内部原始抓取顺序，只对频道做排序==========
+    # 1.先记录每个频道的排序信息（每个频道取第一条）
+    channel_meta = df.groupby("program_name", sort=False).first().reset_index()
+    channel_meta = channel_meta[["program_name","group_sort","cctv_num_sort","group"]]
+    # 频道之间排序
+    channel_meta = channel_meta.sort_values(by=["group_sort","cctv_num_sort","program_name"], ascending=[True,True,True])
 
-    # 每个频道最多保留 MAX_URL_PER_CHANNEL 条链接，优先保留靠前优先级源
-    def take_max_n(group_df):
-        return group_df.head(MAX_URL_PER_CHANNEL)
+    # 2.按program_name分组，每个频道截取最多MAX_URL_PER_CHANNEL条，**保留内部原始抓取顺序（范明明优先在前）**
+    df_grouped = df.groupby("program_name", sort=False).agg({"stream_url":lambda x: list(x.head(MAX_URL_PER_CHANNEL))}).reset_index()
+    # 和排序后的频道元数据合并，得到正确频道顺序
+    df_merge = pd.merge(channel_meta, df_grouped, on="program_name", how="inner")
+    # 展开url列表为多行
+    df_explode = df_merge.explode("stream_url").reset_index(drop=True)
 
-    df = df.groupby("program_name", group_keys=False).apply(take_max_n)
-
-    df = df.reset_index(drop=True)
-
-    cctv_df = df[df['group'] == "央视频道"]
-    wt_df = df[df['group'] == "卫视频道"]
-    kid_df = df[df['group'] == "少儿频道"]
+    cctv_df = df_explode[df_explode['group'] == "央视频道"]
+    wt_df = df_explode[df_explode['group'] == "卫视频道"]
+    kid_df = df_explode[df_explode['group'] == "少儿频道"]
     print(f"\n🔍解析统计（每个频道最多保留 {MAX_URL_PER_CHANNEL} 条链接）：")
     print(f"央视频道：{len(cctv_df)}")
     print(f"卫视频道：{len(wt_df)}")
     print(f"少儿频道：{len(kid_df)}")
-    print(f"总有效条目(含多url)：{len(df)}")
-    return df
+    print(f"总有效条目(含多url)：{len(df_explode)}")
+    return df_explode
 
 
 def save_to_total_txt(df, filename="iptv.txt"):
     ipv4 = []
     ipv6 = []
     domain = []
-    for _, row in df.iterrows():
-        program = row['program_name']
-        url = row['stream_url']
+    # 修复：使用 .itertuples 规避旧pandas行索引KeyError问题
+    for row in df.itertuples(index=False):
+        program = row.program_name
+        url = row.stream_url
         if ipv4_pattern.match(url):
             ipv4.append(f"{program},{url}")
         elif ipv6_pattern.match(url):
@@ -215,7 +219,7 @@ def save_to_total_txt(df, filename="iptv.txt"):
         else:
             domain.append(f"{program},{url}")
 
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, 'w', encoding='utf‑8') as f:
         f.write("# IPv4 Streams\n")
         f.write("\n".join(ipv4))
         f.write("\n\n# IPv6 Streams\n")
@@ -226,13 +230,13 @@ def save_to_total_txt(df, filename="iptv.txt"):
 
 
 def save_to_m3u(df, filename="iptv.m3u"):
-    with open(filename, 'w', encoding='utf-8', newline='') as f:
+    with open(filename, 'w', encoding='utf‑8', newline='') as f:
         f.write("#EXTM3U\n")
-        for _, row in df.iterrows():
-            program = row['program_name']
-            group = row['group']
-            url = row['stream_url']
-            f.write(f'#EXTINF:-1 tvg-name="{program}" group-title="{group}",{program}\n{url}\n')
+        for row in df.itertuples(index=False):
+            program = row.program_name
+            group = row.group
+            url = row.stream_url
+            f.write(f'#EXTINF:-1 tvg‑name="{program}" group‑title="{group}",{program}\n{url}\n')
     print(f"M3U文件已保存: {os.path.abspath(filename)}")
 
 
