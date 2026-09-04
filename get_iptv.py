@@ -35,14 +35,16 @@ CHANNEL_WHITELIST = [
     "卫视"
 ]
 
-# 抓取源列表：migu放第一位，范明明放到第三位
+# 网络抓取源列表：移除第一个报错的migu外网源
 urls = [
-    "http://www.52top.com.cn:678/downloads/migu.txt",
     "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://ghproxy.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt",
 ]
+
+# 本地源文件名（仓库根目录 local.txt）
+LOCAL_SOURCE_FILE = "local.txt"
 # ========================================================================
 
 pd.options.mode.chained_assignment = None
@@ -54,6 +56,17 @@ clean_char_pattern = re.compile(r'[^\x00-\x7E\u4e00-\u9fff]')
 def clean_text(text: str) -> str:
     """清理文本中隐形特殊Unicode字符"""
     return clean_char_pattern.sub('', text)
+
+def fetch_local_file(filepath):
+    """读取仓库本地自定义源 local.txt"""
+    if os.path.exists(filepath):
+        print(f"✅加载本地源文件: {filepath}")
+        with open(filepath, "r", encoding="utf-8") as f:
+            raw = f.read()
+        return clean_text(raw)
+    else:
+        print(f"⚠️本地源文件 {filepath} 不存在，跳过本地源")
+        return None
 
 def get_priority_score(channel_name):
     """手动优先列表，匹配到返回序号，没匹配返回9999"""
@@ -104,6 +117,12 @@ def fetch_streams_from_url(url):
 
 def fetch_all_streams():
     all_streams = []
+    # 优先读取本地源（优先级最高）
+    local_content = fetch_local_file(LOCAL_SOURCE_FILE)
+    if local_content and len(local_content.strip())>5:
+        all_streams.append(local_content.strip())
+
+    # 读取网络源
     for url in urls:
         content = fetch_streams_from_url(url)
         if content and len(content.strip()) > 10:
@@ -161,11 +180,9 @@ def organize_streams(content):
     grouped['priority'] = grouped['program_name'].apply(get_priority_score)
     grouped['cctv_no'] = grouped['program_name'].apply(parse_cctv_num)
 
-    # 分组顺序：央视频道0，卫视频道1
     group_order = {"央视频道":0, "卫视频道":1}
     grouped["group_order"] = grouped["group"].map(group_order)
 
-    # 排序规则：分组 > 手动优先列表 > cctv数字 > 频道名称字符串排序
     grouped = grouped.sort_values(
         by=["group_order", "priority", "cctv_no", "program_name"],
         ascending=[True, True, True, True]
