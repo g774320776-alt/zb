@@ -1,8 +1,9 @@
 import requests
+import pandas as pd
 import re
 import os
 
-# 源列表，顺序就是写入M3U的顺序：范明明 → iptv6 → iptv4
+# =========改动：范明明源放在第一位，优先抓取=========
 urls = [
     "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
     "https://live.zbds.top/tv/iptv6.txt",
@@ -67,6 +68,7 @@ def get_channel_group(name: str):
         return "央视频道"
     if "卫视" in name:
         return "卫视频道"
+    # 地方台、其他全部返回None直接丢弃
     return None
 
 
@@ -89,7 +91,7 @@ def is_bad_name(name: str) -> bool:
 
 
 def fetch_streams_from_url(url, retries=2):
-    print(f"\n正在抓取源: {url}")
+    print(f"正在爬取网站源: {url}")
     for attempt in range(retries):
         try:
             response = requests.get(url, headers=HEADERS, timeout=15)
@@ -101,6 +103,15 @@ def fetch_streams_from_url(url, retries=2):
             print(f"请求 {url} 异常: {e}")
     print(f"跳过来源: {url}")
     return None
+
+
+def fetch_all_streams():
+    all_streams = []
+    for url in urls:
+        content = fetch_streams_from_url(url)
+        if content:
+            all_streams.append(content)
+    return "\n".join(all_streams)
 
 
 def parse_m3u(content):
@@ -134,65 +145,83 @@ def parse_txt(content):
     return streams
 
 
-def parse_single_source(content):
-    """解析单个源内容，返回过滤后的流列表"""
+def organize_streams(content):
     parser = parse_m3u if content.lstrip().startswith("#EXTM3U") else parse_txt
     raw = parser(content)
-    valid = []
-    for item in raw:
-        name = item["program_name"]
-        url = item["stream_url"]
-        group = get_channel_group(name)
-        if group is not None and url.startswith("http"):
-            valid.append({"program_name": name, "stream_url": url, "group": group})
-    return valid
+    df = pd.DataFrame(raw)
+    if df.empty:
+        return df
+
+    df = df[df['program_name'].str.len() > 0]
+    df = df[df['stream_url'].str.len() > 0]
+    df = df[df["stream_url"].str.match(r"^http")]
+
+    df['group'] = df['program_name'].apply(get_channel_group)
+    df = df[df["group"].notna()]
+
+    # =========关键：按频道名称去重，keep=first，范明明先抓取，同名优先保留他的源=========
+    df = df.drop_duplicates(subset=["program_name"], keep="first")
+
+    df["group_sort"] = df["group"].map(group_priority)
+    df["cctv_num_sort"] = df["program_name"].apply(get_cctv_sort_key)
+
+    df = df.sort_values(by=["group_sort", "cctv_num_sort", "program_name"], ascending=[True, True, True])
+    df = df.reset_index(drop=True)
+
+    cctv_df = df[df['group'] == "央视频道"]
+    wt_df = df[df['group'] == "卫视频道"]
+    kid_df = df[df['group'] == "少儿频道"]
+    print(f"\n🔍解析统计：")
+    print(f"央视频道：{len(cctv_df)}")
+    print(f"卫视频道：{len(wt_df)}")
+    print(f"少儿频道：{len(kid_df)}")
+    return df
 
 
-def main():
-    clean_old_files()
-    all_items = []
-
-    # 逐个抓取每个url，解析后直接收集，顺序保持：范明明 → iptv6 → iptv4
-    for url in urls:
-        text = fetch_streams_from_url(url)
-        if not text:
-            continue
-        items = parse_single_source(text)
-        print(f"本来源有效流数量：{len(items)}")
-        all_items.extend(items)
-
-    # 写入M3U
-    with open("iptv.m3u", 'w', encoding='utf-8', newline='') as f:
-        f.write("#EXTM3U\n")
-        for item in all_items:
-            prog = item["program_name"]
-            grp = item["group"]
-            url = item["stream_url"]
-            f.write(f'#EXTINF:-1 tvg-name="{prog}" group-title="{grp}",{prog}\n{url}\n')
-
-    # 同时输出iptv.txt
+def save_to_total_txt(df, filename="iptv.txt"):
     ipv4 = []
     ipv6 = []
-    for item in all_items:
-        p = item["program_name"]
-        u = item["stream_url"]
-        if ipv4_pattern.match(u):
-            ipv4.append(f"{p},{u}")
-        elif ipv6_pattern.match(u):
-            ipv6.append(f"{p},{u}")
+    for _, row in df.iterrows():
+        program = row['program_name']
+        url = row['stream_url']
+        if ipv4_pattern.match(url):
+            ipv4.append(f"{program},{url}")
+        elif ipv6_pattern.match(url):
+            ipv6.append(f"{program},{url}")
         else:
-            ipv4.append(f"{p},{u}")
+            ipv4.append(f"{program},{url}")
 
-    with open("iptv.txt", 'w', encoding='utf-8') as f:
+    with open(filename, 'w', encoding='utf-8') as f:
         f.write("# IPv4 Streams\n")
         f.write("\n".join(ipv4))
         f.write("\n\n# IPv6 Streams\n")
         f.write("\n".join(ipv6))
+    print(f"总文本文件已保存: {os.path.abspath(filename)}")
 
-    print(f"\n✅完成！总流数量：{len(all_items)}")
-    print(f"m3u路径：{os.path.abspath('iptv.m3u')}")
-    print(f"txt路径：{os.path.abspath('iptv.txt')}")
+
+def save_to_m3u(df, filename="iptv.m3u"):
+    with open(filename, 'w', encoding='utf-8', newline='') as f:
+        f.write("#EXTM3U\n")
+        for _, row in df.iterrows():
+            program = row['program_name']
+            group = row['group']
+            url = row['stream_url']
+            f.write(f'#EXTINF:-1 tvg-name="{program}" group-title="{group}",{program}\n{url}\n')
+    print(f"M3U文件已保存: {os.path.abspath(filename)}")
 
 
 if __name__ == "__main__":
-    main()
+    clean_old_files()
+    print("开始抓取所有源...")
+    content = fetch_all_streams()
+    if content:
+        print("整理源数据中...")
+        df_result = organize_streams(content)
+        if not df_result.empty:
+            save_to_total_txt(df_result)
+            save_to_m3u(df_result)
+            print(f"\n✅全部完成！共 {len(df_result)} 条直播流")
+        else:
+            print("❌没有有效节目")
+    else:
+        print("❌未能获取有效数据")
