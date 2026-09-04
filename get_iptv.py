@@ -47,16 +47,23 @@ def clean_text(text: str) -> str:
     """清理文本中隐形特殊Unicode字符，修复\u2011报错"""
     return clean_char_pattern.sub('', text)
 
-def natural_sort_key(s):
-    """CCTV自然数字排序，解决CCTV‑10跑到CCTV‑2前面"""
-    return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s)]
+def natural_sort_str(s):
+    """返回字符串版本自然排序key，不再返回list，解决不可哈希list报错"""
+    parts = re.split(r'(\d+)', s)
+    key_parts = []
+    for p in parts:
+        if p.isdigit():
+            key_parts.append(f"{int(p):06d}")
+        else:
+            key_parts.append(p.lower())
+    return "|".join(key_parts)
 
 def get_priority_score(channel_name):
     """计算频道优先级分数，越小越靠前；模糊匹配PRIORITY_CHANNELS"""
     for idx, keyword in enumerate(PRIORITY_CHANNELS):
         if keyword in channel_name:
             return idx
-    # 不在优先列表，放到后面，附加自然排序key
+    # 不在优先列表，放到后面
     return 9999
 
 def fetch_streams_from_url(url):
@@ -129,11 +136,9 @@ def organize_streams(content):
     # 分组
     grouped = df.groupby('program_name')['stream_url'].apply(list).reset_index()
 
-    # ====== 自定义排序逻辑 ======
-    # 1. 添加优先级分数
+    # ====== 修复：全部使用字符串key，不存入list，解决TypeError:不可哈希类型:"list" ======
     grouped['priority'] = grouped['program_name'].apply(get_priority_score)
-    # 2. 优先分数升序；同分数内部使用自然排序
-    grouped['sort_key'] = grouped['program_name'].apply(natural_sort_key)
+    grouped['sort_key'] = grouped['program_name'].apply(natural_sort_str)
     grouped = grouped.sort_values(by=["priority", "sort_key"], ascending=[True, True])
     grouped = grouped.drop(columns=["priority", "sort_key"]).reset_index(drop=True)
     print(f"✅完成自定义频道排序")
