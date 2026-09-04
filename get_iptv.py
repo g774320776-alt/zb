@@ -3,8 +3,8 @@ import pandas as pd
 import re
 import os
 
-# ====================== 【自定义配置区，在这里修改】 ======================
-# 优先频道顺序：支持完整名称或者关键词模糊匹配，越靠前输出越优先
+# ====================== 【自定义配置区】 ======================
+# 优先频道顺序：越靠前输出越优先
 PRIORITY_CHANNELS = [
     "CCTV‑1",
     "CCTV‑2",
@@ -28,9 +28,17 @@ PRIORITY_CHANNELS = [
     "广东卫视"
 ]
 
-# 抓取源列表：【范明明源放在第一位，优先抓取】
+# 【强制：只保留 CCTV 和 卫视，其余全部丢弃】
+# 白名单开关打开，只有名称包含CCTV 或者 卫视 的频道才会保留
+ENABLE_WHITELIST = True
+CHANNEL_WHITELIST = [
+    "CCTV",
+    "卫视"
+]
+
+# 抓取源列表：范明明源放第一位，ghproxy代理
 urls = [
-    "https://raw.githubusercontent.com/farmingming/live/main/tv/m3u/iov6.m3u",
+    "https://ghproxy.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
     "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt",
@@ -44,11 +52,11 @@ ipv6_pattern = re.compile(r'^http://\[([a-fA-F0-9:]+)\]')
 clean_char_pattern = re.compile(r'[^\x00-\x7E\u4e00-\u9fff]')
 
 def clean_text(text: str) -> str:
-    """清理文本中隐形特殊Unicode字符，修复\u2011报错"""
+    """清理文本中隐形特殊Unicode字符"""
     return clean_char_pattern.sub('', text)
 
 def natural_sort_str(s):
-    """返回字符串版本自然排序key，不再返回list，解决不可哈希list报错"""
+    """自然排序，解决CCTV‑10排在CCTV‑2前面问题"""
     parts = re.split(r'(\d+)', s)
     key_parts = []
     for p in parts:
@@ -59,12 +67,21 @@ def natural_sort_str(s):
     return "|".join(key_parts)
 
 def get_priority_score(channel_name):
-    """计算频道优先级分数，越小越靠前；模糊匹配PRIORITY_CHANNELS"""
+    """频道优先级分数，数字越小越靠前"""
     for idx, keyword in enumerate(PRIORITY_CHANNELS):
         if keyword in channel_name:
             return idx
-    # 不在优先列表，放到后面
     return 9999
+
+def is_keep_channel(channel_name, stream_url):
+    """过滤：只保留白名单（CCTV / 卫视）"""
+    name = channel_name.lower()
+    # 白名单模式：频道包含CCTV 或者 卫视才保留
+    if ENABLE_WHITELIST:
+        hit = any(kw.lower() in name for kw in CHANNEL_WHITELIST)
+        if not hit:
+            return False
+    return True
 
 def fetch_streams_from_url(url):
     print(f"正在爬取网站源: {url}")
@@ -93,7 +110,7 @@ def fetch_all_streams():
     return "\n".join(all_streams)
 
 def parse_content(content):
-    """兼容混合 M3U + TXT 混合内容，逐行解析"""
+    """解析m3u/txt，同时执行过滤，只留下CCTV和卫视"""
     streams = []
     current_program = None
 
@@ -107,17 +124,20 @@ def parse_content(content):
             if match:
                 current_program = match.group(1).strip()
             continue
+        # txt格式：频道名,url
         if ',' in line and not line.startswith(('http', 'https')):
             match = re.match(r"(.+?),\s*(http.+)", line)
             if match:
                 p_name = match.group(1).strip()
                 p_url = match.group(2).strip()
-                if p_name and p_url:
+                if is_keep_channel(p_name, p_url):
                     streams.append({"program_name": p_name, "stream_url": p_url})
             continue
+        # m3u链接行
         if line.startswith(("http://", "https://")):
             if current_program:
-                streams.append({"program_name": current_program, "stream_url": line})
+                if is_keep_channel(current_program, line):
+                    streams.append({"program_name": current_program, "stream_url": line})
                 current_program = None
     return streams
 
@@ -131,17 +151,15 @@ def organize_streams(content):
     df = pd.DataFrame(raw_list)
     df = df[(df["program_name"] != "") & (df["stream_url"] != "")]
     df = df.drop_duplicates(subset=['program_name', 'stream_url'])
-    print(f"去重后总频道链接数: {len(df)}")
+    print(f"过滤后总频道链接数: {len(df)}")
 
-    # 分组
     grouped = df.groupby('program_name')['stream_url'].apply(list).reset_index()
 
-    # ====== 修复：全部使用字符串key，不存入list，解决TypeError:不可哈希类型:"list" ======
     grouped['priority'] = grouped['program_name'].apply(get_priority_score)
     grouped['sort_key'] = grouped['program_name'].apply(natural_sort_str)
     grouped = grouped.sort_values(by=["priority", "sort_key"], ascending=[True, True])
     grouped = grouped.drop(columns=["priority", "sort_key"]).reset_index(drop=True)
-    print(f"✅完成自定义频道排序")
+    print(f"✅完成频道排序")
     return grouped
 
 
@@ -183,10 +201,10 @@ if __name__ == "__main__":
     if full_content and len(full_content.strip()) > 20:
         print("整理源数据中...")
         organized_df = organize_streams(full_content)
-        if len(organized_df) >0:
+        if len(organized_df) > 0:
             save_to_txt(organized_df)
             save_to_m3u(organized_df)
         else:
-            print("解析后无频道数据，输出文件跳过")
+            print("解析后无频道数据，跳过输出")
     else:
         print("❌未能获取有效数据，全部源抓取失败")
