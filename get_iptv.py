@@ -35,16 +35,13 @@ CHANNEL_WHITELIST = [
     "卫视"
 ]
 
-# 网络抓取源列表：移除第一个报错的migu外网源
+# 网络抓取源列表
 urls = [
     "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://ghproxy.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt",
 ]
-
-# 本地源文件名（仓库根目录 local.txt）
-LOCAL_SOURCE_FILE = "local.txt"
 # ========================================================================
 
 pd.options.mode.chained_assignment = None
@@ -56,17 +53,6 @@ clean_char_pattern = re.compile(r'[^\x00-\x7E\u4e00-\u9fff]')
 def clean_text(text: str) -> str:
     """清理文本中隐形特殊Unicode字符"""
     return clean_char_pattern.sub('', text)
-
-def fetch_local_file(filepath):
-    """读取仓库本地自定义源 local.txt"""
-    if os.path.exists(filepath):
-        print(f"✅加载本地源文件: {filepath}")
-        with open(filepath, "r", encoding="utf-8") as f:
-            raw = f.read()
-        return clean_text(raw)
-    else:
-        print(f"⚠️本地源文件 {filepath} 不存在，跳过本地源")
-        return None
 
 def get_priority_score(channel_name):
     """手动优先列表，匹配到返回序号，没匹配返回9999"""
@@ -117,12 +103,7 @@ def fetch_streams_from_url(url):
 
 def fetch_all_streams():
     all_streams = []
-    # 优先读取本地源（优先级最高）
-    local_content = fetch_local_file(LOCAL_SOURCE_FILE)
-    if local_content and len(local_content.strip())>5:
-        all_streams.append(local_content.strip())
-
-    # 读取网络源
+    # 只抓取网络源，已完全移除本地local.txt逻辑
     for url in urls:
         content = fetch_streams_from_url(url)
         if content and len(content.strip()) > 10:
