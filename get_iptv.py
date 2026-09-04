@@ -6,21 +6,21 @@ import os
 # ====================== 【自定义配置区】 ======================
 # 优先频道顺序：越靠前输出越优先
 PRIORITY_CHANNELS = [
-    "CCTV-1",
-    "CCTV-2",
-    "CCTV-3",
-    "CCTV-4",
-    "CCTV-5",
-    "CCTV-6",
-    "CCTV-7",
-    "CCTV-8",
-    "CCTV-9",
-    "CCTV-10",
-    "CCTV-11",
-    "CCTV-12",
-    "CCTV-13",
-    "CCTV-14",
-    "CCTV-15",
+    "CCTV‑1",
+    "CCTV‑2",
+    "CCTV‑3",
+    "CCTV‑4",
+    "CCTV‑5",
+    "CCTV‑6",
+    "CCTV‑7",
+    "CCTV‑8",
+    "CCTV‑9",
+    "CCTV‑10",
+    "CCTV‑11",
+    "CCTV‑12",
+    "CCTV‑13",
+    "CCTV‑14",
+    "CCTV‑15",
     "湖南卫视",
     "浙江卫视",
     "江苏卫视",
@@ -35,10 +35,10 @@ CHANNEL_WHITELIST = [
     "卫视"
 ]
 
-# 网络抓取源列表
+# 抓取源列表：范明明源放第一位，ghproxy代理
 urls = [
-    "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://ghproxy.com/https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
+    "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt",
 ]
@@ -47,8 +47,8 @@ urls = [
 pd.options.mode.chained_assignment = None
 
 ipv4_pattern = re.compile(r'^http://(\d{1,3}\.){3}\d{1,3}')
-ipv6_pattern = re.compile(r'^http://\[([a-fA-F0-9:]+)\]')
-clean_char_pattern = re.compile(r'[^\x00-\x7E\u4e00-\u9fff]')
+ipv6_pattern = re.compile(r'^http://\[([a‑fA‑F0‑9:]+)\]')
+clean_char_pattern = re.compile(r'[^\x00‑\x7E\u4e00‑\u9fff]')
 
 def clean_text(text: str) -> str:
     """清理文本中隐形特殊Unicode字符"""
@@ -89,10 +89,10 @@ def fetch_streams_from_url(url):
     print(f"正在爬取网站源: {url}")
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            "User‑Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
         response = requests.get(url, headers=headers, timeout=15)
-        response.encoding = 'utf-8'
+        response.encoding = 'utf‑8'
         if response.status_code == 200:
             raw = response.text
             return clean_text(raw)
@@ -103,7 +103,6 @@ def fetch_streams_from_url(url):
 
 def fetch_all_streams():
     all_streams = []
-    # 只抓取网络源，已完全移除本地local.txt逻辑
     for url in urls:
         content = fetch_streams_from_url(url)
         if content and len(content.strip()) > 10:
@@ -123,7 +122,7 @@ def parse_content(content):
             continue
 
         if line.startswith("#EXTINF"):
-            match = re.search(r'tvg-name="([^"]+)"', line)
+            match = re.search(r'tvg‑name="([^"]+)"', line)
             if match:
                 current_program = match.group(1).strip()
             continue
@@ -161,9 +160,11 @@ def organize_streams(content):
     grouped['priority'] = grouped['program_name'].apply(get_priority_score)
     grouped['cctv_no'] = grouped['program_name'].apply(parse_cctv_num)
 
+    # 分组顺序：央视频道0，卫视频道1
     group_order = {"央视频道":0, "卫视频道":1}
     grouped["group_order"] = grouped["group"].map(group_order)
 
+    # 排序规则：分组 > 手动优先列表 > cctv数字 > 频道名称字符串排序
     grouped = grouped.sort_values(
         by=["group_order", "priority", "cctv_no", "program_name"],
         ascending=[True, True, True, True]
@@ -177,7 +178,7 @@ def save_to_txt(grouped_streams, filename="iptv.txt"):
     cctv_rows = grouped_streams[grouped_streams["group"]=="央视频道"]
     ws_rows = grouped_streams[grouped_streams["group"]=="卫视频道"]
 
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, 'w', encoding='utf‑8') as f:
         f.write("# 央视频道\n")
         for _, row in cctv_rows.iterrows():
             program = row['program_name']
@@ -194,13 +195,13 @@ def save_to_txt(grouped_streams, filename="iptv.txt"):
 
 
 def save_to_m3u(grouped_streams, filename="iptv.m3u"):
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, 'w', encoding='utf‑8') as f:
         f.write("#EXTM3U\n")
         for _, row in grouped_streams.iterrows():
             program = row['program_name']
             group = row['group']
             for url in row['stream_url']:
-                f.write(f'#EXTINF:-1 tvg-name="{program}" group-title="{group}",{program}\n{url}\n')
+                f.write(f'#EXTINF:-1 tvg‑name="{program}" group‑title="{group}",{program}\n{url}\n')
     print(f"✅M3U文件已保存: {os.path.abspath(filename)}")
 
 
