@@ -5,6 +5,7 @@ import os
 
 # =========改动：范明明源放在第一位，优先抓取=========
 urls = [
+    "https://raw.githubusercontent.com/zwc456baby/iptv_alive/master/live.txt",
     "https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u",
     "https://live.zbds.top/tv/iptv6.txt",
     "https://live.zbds.top/tv/iptv4.txt"
