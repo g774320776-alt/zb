@@ -1,0 +1,81 @@
+{
+  "sites": [
+    {
+      "key": "Nostr",
+      "name": "Nostr推荐 [影视]",
+      "type": 1,
+      "api": "csp_Nostr",
+      "homePage": "https://www.252035.xyz/xs/tvbox/nostr.html"
+    },
+    {
+      "key": "nmvm",
+      "name": "农民影视.py [影视]",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/农民影视.py"
+    },
+    {
+      "key": "hstv",
+      "name": "华数TV.py [影视]",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/华数TV.py"
+    },
+    {
+      "key": "MGtv",
+      "name": "芒果TV.py [影视]",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/芒果TV.py"
+    },
+    {
+      "key": "ppx",
+      "name": "皮皮虾.py [影视]",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/皮皮虾.py",
+      "ext": "http://43.248.117.123:4680"
+    }
+  ],
+  "lives": [
+    {
+      "name": "自用",
+      "type": 0,
+      "playerType": 2,
+      "ua": "Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0",
+      "url": "https://raw.githubusercontent.com/g774320776-alt/zb/main/iptv.m3u"
+    },
+    {
+      "name": "综合直播",
+      "type": 0,
+      "playerType": 2,
+      "ua": "Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0",
+      "url": "https://raw.githubusercontent.com/fleung49/star/refs/heads/main/mit"
+    },
+    {
+      "name": "电视家",
+      "type": 0,
+      "playerType": 2,
+      "ua": "Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0",
+      "url": "https://github.com/bang359/dsj/raw/main/dsjcs.txt"
+    }
+  ],
+  "parses": [
+    {
+      "name": "聚合",
+      "type": 3,
+      "url": "Web"
+    },
+    {
+      "name": "解析1",
+      "type": 0,
+      "url": "https://huayong.net/999/?v="
+    },
+    {
+      "name": "解析3",
+      "type": 0,
+      "url": "https://t2.qlplayer.cyou/player/analysis.php?v="
+    },
+    {
+      "name": "解析6",
+      "type": 0,
+      "url": "https://www.yemu.xyz/?url="
+    }
+  ]
+}
