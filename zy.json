@@ -1,0 +1,56 @@
+{
+  "sites": [
+    {
+      "key": "Nostr",
+      "name": "Nostr推荐 [影视]",
+      "type": 1,
+      "api": "csp_Nostr",
+      "homePage": "https://www.252035.xyz/xs/tvbox/nostr.html"
+    }
+  ],
+  "lives": [
+    {
+      "name": "自用",
+      "type": 0,
+      "playerType": 2,
+      "ua": "Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0",
+      "url": "https://raw.githubusercontent.com/g774320776-alt/zb/main/iptv.m3u"
+    },
+    {
+      "name": "综合直播",
+      "type": 0,
+      "playerType": 2,
+      "ua": "Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0",
+      "url": "https://raw.githubusercontent.com/fleung49/star/refs/heads/main/mit"
+    },
+    {
+      "name": "电视家",
+      "type": 0,
+      "playerType": 2,
+      "ua": "Mozilla/5.0 (Android 4.4; Mobile; rv:41.0) Gecko/41.0 Firefox/41.0",
+      "url": "https://github.com/bang359/dsj/raw/main/dsjcs.txt"
+    }
+  ],
+  "parses": [
+    {
+      "name": "聚合",
+      "type": 3,
+      "url": "Web"
+    },
+    {
+      "name": "解析1",
+      "type": 0,
+      "url": "https://huayong.net/999/?v="
+    },
+    {
+      "name": "解析3",
+      "type": 0,
+      "url": "https://t2.qlplayer.cyou/player/analysis.php?v="
+    },
+    {
+      "name": "解析6",
+      "type": 0,
+      "url": "https://www.yemu.xyz/?url="
+    }
+  ]
+}
