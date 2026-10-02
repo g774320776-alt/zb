@@ -1,6 +1,15 @@
 {
   "sites": [
      {
+      "key": "央视网[直播]_py",
+      "name": "央视网[直播]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": ".https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/央视网[直播].py"
+     },
+     {
       "key": "Nostr",
       "name": "Nostr推荐 [影视]",
       "type": 3,
@@ -68,12 +77,6 @@
       "ua": "okhttp/5.3.2",
       "url": "http://www.52top.com.cn:678/downloads/migu.txt"
     },
-    {
-      "name": "自用",
-      "type": 0,
-      "ua": "okhttp",
-      "url": "https://raw.githubusercontent.com/g774320776-alt/zb/main/iptv.m3u"
-      },
     {
       "name": "综合直播",
       "type": 0,
