@@ -8,6 +8,816 @@
       "homePage": "https://www.252035.xyz/xs/tvbox/nostr.html"
     },
     {
+      "key": "1234影视[影视]_py",
+      "name": "1234影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/1234影视[影视].py"
+    },
+    {
+      "key": "30剧集网[影视]_py",
+      "name": "30剧集网[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/30剧集网[影视].py"
+    },
+    {
+      "key": "4K影视[影视]_py",
+      "name": "4K影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/4K影视[影视].py"
+    },
+    {
+      "key": "58影视[影视]_py",
+      "name": "58影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/58影视[影视].py"
+    },
+    {
+      "key": "6080新视觉[影视]_py",
+      "name": "6080新视觉[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/6080新视觉[影视].py"
+    },
+    {
+      "key": "66大片网[影视]_py",
+      "name": "66大片网[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/66大片网[影视].py"
+    },
+    {
+      "key": "808影院[影视]_py",
+      "name": "808影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/808影院[影视].py"
+    },
+    {
+      "key": "FoFo影院[影视]_py",
+      "name": "FoFo影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/FoFo影院[影视].py"
+    },
+    {
+      "key": "FreeOK[影视]_py",
+      "name": "FreeOK[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/FreeOK[影视].py"
+    },
+    {
+      "key": "pomo[影视]_py",
+      "name": "pomo[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/pomo[影视].py"
+    },
+    {
+      "key": "VIP兔[影视]_py",
+      "name": "VIP兔[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/VIP兔[影视].py"
+    },
+    {
+      "key": "VS影院[影视]_py",
+      "name": "VS影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/VS影院[影视].py"
+    },
+    {
+      "key": "一起影视[影视]_py",
+      "name": "一起影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/一起影视[影视].py"
+    },
+    {
+      "key": "七味[影视]_py",
+      "name": "七味[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/七味[影视].py"
+    },
+    {
+      "key": "七猫影视[影视]_py",
+      "name": "七猫影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/七猫影视[影视].py"
+    },
+    {
+      "key": "仙腾影院[影视]_py",
+      "name": "仙腾影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/仙腾影院[影视].py"
+    },
+    {
+      "key": "优视频[影视]_py",
+      "name": "优视频[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/优视频[影视].py"
+    },
+    {
+      "key": "优酷视频[影视]_py",
+      "name": "优酷视频[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/优酷视频[影视].py"
+    },
+    {
+      "key": "低端影视[影视]_py",
+      "name": "低端影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/低端影视[影视].py"
+    },
+    {
+      "key": "八天电影[影视]_py",
+      "name": "八天电影[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/八天电影[影视].py"
+    },
+    {
+      "key": "八戒影视[影视]_py",
+      "name": "八戒影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/八戒影视[影视].py"
+    },
+    {
+      "key": "农民影视[影视]_py",
+      "name": "农民影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/农民影视[影视].py"
+    },
+    {
+      "key": "初见影视[影视]_py",
+      "name": "初见影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/初见影视[影视].py"
+    },
+    {
+      "key": "剧OK[影视]_py",
+      "name": "剧OK[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/剧OK[影视].py"
+    },
+    {
+      "key": "剧下饭4K[影视]_py",
+      "name": "剧下饭4K[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/剧下饭4K[影视].py"
+    },
+    {
+      "key": "努努影院[影视]_py",
+      "name": "努努影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/努努影院[影视].py"
+    },
+    {
+      "key": "华数TV[影视]_py",
+      "name": "华数TV[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/华数TV[影视].py"
+    },
+    {
+      "key": "厂长影视[影视]_py",
+      "name": "厂长影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/厂长影视[影视].py"
+    },
+    {
+      "key": "君念影院[影视]_py",
+      "name": "君念影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/君念影院[影视].py"
+    },
+    {
+      "key": "喜福影视[影视]_py",
+      "name": "喜福影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/喜福影视[影视].py"
+    },
+    {
+      "key": "嘀嗒影视[影视]_py",
+      "name": "嘀嗒影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/嘀嗒影视[影视].py"
+    },
+    {
+      "key": "多多影视[影视]_py",
+      "name": "多多影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/多多影视[影视].py"
+    },
+    {
+      "key": "多瑙影院[影视]_py",
+      "name": "多瑙影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/多瑙影院[影视].py"
+    },
+    {
+      "key": "大象影视[影视]_py",
+      "name": "大象影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/大象影视[影视].py"
+    },
+    {
+      "key": "大马猴[影视]_py",
+      "name": "大马猴[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/大马猴[影视].py"
+    },
+    {
+      "key": "太乙影视[影视]_py",
+      "name": "太乙影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/太乙影视[影视].py"
+    },
+    {
+      "key": "威视TV[影视]_py",
+      "name": "威视TV[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/威视TV[影视].py"
+    },
+    {
+      "key": "宅男影视[影视]_py",
+      "name": "宅男影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/宅男影视[影视].py"
+    },
+    {
+      "key": "山水影视[影视]_py",
+      "name": "山水影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/山水影视[影视].py"
+    },
+    {
+      "key": "巨量资源[影视]_py",
+      "name": "巨量资源[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/巨量资源[影视].py"
+    },
+    {
+      "key": "影视大全[影视]_py",
+      "name": "影视大全[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/影视大全[影视].py"
+    },
+    {
+      "key": "影视巴士[影视]_py",
+      "name": "影视巴士[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/影视巴士[影视].py"
+    },
+    {
+      "key": "影视聚合[影视]_py",
+      "name": "影视聚合[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/影视聚合[影视].py"
+    },
+    {
+      "key": "悟圣影视[影视]_py",
+      "name": "悟圣影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/悟圣影视[影视].py"
+    },
+    {
+      "key": "搜剧AI[影视]_py",
+      "name": "搜剧AI[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/搜剧AI[影视].py"
+    },
+    {
+      "key": "星芽影视[影视]_py",
+      "name": "星芽影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星芽影视[影视].py"
+    },
+    {
+      "key": "星辰影院[影视]_py",
+      "name": "星辰影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/星辰影院[影视].py"
+    },
+    {
+      "key": "映刻影视[影视]_py",
+      "name": "映刻影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/映刻影视[影视].py"
+    },
+    {
+      "key": "枫叶影院[影视]_py",
+      "name": "枫叶影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/枫叶影院[影视].py"
+    },
+    {
+      "key": "楓林網[影视]_py",
+      "name": "楓林網[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/楓林網[影视].py"
+    },
+    {
+      "key": "毒舌影视[影视]_py",
+      "name": "毒舌影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/毒舌影视[影视].py"
+    },
+    {
+      "key": "永乐视频[影视]_py",
+      "name": "永乐视频[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/永乐视频[影视].py"
+    },
+    {
+      "key": "河马剧场[影视]_py",
+      "name": "河马剧场[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/河马剧场[影视].py"
+    },
+    {
+      "key": "油管[影视]_py",
+      "name": "油管[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/油管[影视].py"
+    },
+    {
+      "key": "泡泡影院[影视]_py",
+      "name": "泡泡影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/泡泡影院[影视].py"
+    },
+    {
+      "key": "泥视频[影视]_py",
+      "name": "泥视频[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/泥视频[影视].py"
+    },
+    {
+      "key": "热播APP[影视]_py",
+      "name": "热播APP[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/热播APP[影视].py"
+    },
+    {
+      "key": "爱壹帆[影视]_py",
+      "name": "爱壹帆[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/爱壹帆[影视].py"
+    },
+    {
+      "key": "爱看机器人[影视]_py",
+      "name": "爱看机器人[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/爱看机器人[影视].py"
+    },
+    {
+      "key": "瓜子APP[影视]_py",
+      "name": "瓜子APP[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/瓜子APP[影视].py"
+    },
+    {
+      "key": "电影侠[影视]_py",
+      "name": "电影侠[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/电影侠[影视].py"
+    },
+    {
+      "key": "百花影院[影视]_py",
+      "name": "百花影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/百花影院[影视].py"
+    },
+    {
+      "key": "皮皮虾[影视]_py",
+      "name": "皮皮虾[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/皮皮虾[影视].py"
+    },
+    {
+      "key": "看剧AI[影视]_py",
+      "name": "看剧AI[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/看剧AI[影视].py"
+    },
+    {
+      "key": "看戏影视[影视]_py",
+      "name": "看戏影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/看戏影视[影视].py"
+    },
+    {
+      "key": "真狼影视[影视]_py",
+      "name": "真狼影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/真狼影视[影视].py"
+    },
+    {
+      "key": "糯米影视[影视]_py",
+      "name": "糯米影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/糯米影视[影视].py"
+    },
+    {
+      "key": "网飞TV[影视]_py",
+      "name": "网飞TV[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/网飞TV[影视].py"
+    },
+    {
+      "key": "美剧天堂[影视]_py",
+      "name": "美剧天堂[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/美剧天堂[影视].py"
+    },
+    {
+      "key": "腾爱优芒B[影视]_py",
+      "name": "腾爱优芒B[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/腾爱优芒B[影视].py"
+    },
+    {
+      "key": "腾讯视频[影视]_py",
+      "name": "腾讯视频[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/腾讯视频[影视].py"
+    },
+    {
+      "key": "芒果TV[影视]_py",
+      "name": "芒果TV[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/芒果TV[影视].py"
+    },
+    {
+      "key": "茶杯狐[影视]_py",
+      "name": "茶杯狐[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/茶杯狐[影视].py"
+    },
+    {
+      "key": "草莓影视[影视]_py",
+      "name": "草莓影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/草莓影视[影视].py"
+    },
+    {
+      "key": "蝶卡影视[影视]_py",
+      "name": "蝶卡影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/蝶卡影视[影视].py"
+    },
+    {
+      "key": "袋鼠影视[影视]_py",
+      "name": "袋鼠影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/袋鼠影视[影视].py"
+    },
+    {
+      "key": "视觉影院[影视]_py",
+      "name": "视觉影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/视觉影院[影视].py"
+    },
+    {
+      "key": "豆花影视[影视]_py",
+      "name": "豆花影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/豆花影视[影视].py"
+    },
+    {
+      "key": "追影[影视]_py",
+      "name": "追影[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/追影[影视].py"
+    },
+    {
+      "key": "采集聚合[影视]_py",
+      "name": "采集聚合[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/采集聚合[影视].py"
+    },
+    {
+      "key": "青牛影视[影视]_py",
+      "name": "青牛影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/青牛影视[影视].py"
+    },
+    {
+      "key": "青蛙影视[影视]_py",
+      "name": "青蛙影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/青蛙影视[影视].py"
+    },
+    {
+      "key": "韩剧巴士[影视]_py",
+      "name": "韩剧巴士[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/韩剧巴士[影视].py"
+    },
+    {
+      "key": "韩小圈[影视]_py",
+      "name": "韩小圈[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/韩小圈[影视].py"
+    },
+    {
+      "key": "飞快TV[影视]_py",
+      "name": "飞快TV[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/飞快TV[影视].py"
+    },
+    {
+      "key": "飞流视频[影视]_py",
+      "name": "飞流视频[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/飞流视频[影视].py"
+    },
+    {
+      "key": "饭搭子影视[影视]_py",
+      "name": "饭搭子影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/饭搭子影视[影视].py"
+    },
+    {
+      "key": "骚火影视[影视]_py",
+      "name": "骚火影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/骚火影视[影视].py"
+    },
+    {
+      "key": "麒麟影视[影视]_py",
+      "name": "麒麟影视[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麒麟影视[影视].py"
+    },
+    {
+      "key": "麦田影院[影视]_py",
+      "name": "麦田影院[影视]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麦田影院[影视].py"
+    },
+    {
       "key": "nmvm",
       "name": "农民影视.py [影视]",
       "type": 3,
@@ -70,15 +880,117 @@
       "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/央视网[直播].py"
     }
   ],
-  "lives": [
-    {
-      "name": "咪咕直播",
-      "type": 0,
-      "ua": "okhttp/5.3.2",
-      "url": "http://www.52top.com.cn:678/downloads/migu.txt"
-    }
-  ],
   "parses": [
+    {
+      "name": "盘古",
+      "type": 0,
+      "url": "shturl.cc/buomqXDHfE3yFSg0d9dSaLHmq3RV",
+      "ext": {
+        "header": {
+          "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
+        }
+      }
+    },
+    {
+      "name": "789解析1",
+      "type": 0,
+      "url": "shturl.cc/6WndJhRIcyv4tu25oS0u5xXMAew"
+    },
+    {
+      "name": "789解析2",
+      "type": 0,
+      "url": "shturl.cc/VVGJR98ujiooxP03VfQXNP"
+    },
+    {
+      "name": "虾米解析",
+      "type": 0,
+      "url": "https://jx.xmflv.com/?url="
+    },
+    {
+      "name": "淘片解析",
+      "type": 0,
+      "url": "https://jx.yparse.com/index.php?url="
+    },
+    {
+      "name": "解析1",
+      "type": 0,
+      "url": "https://huayong.net/999/?v="
+    },
+    {
+      "name": "解析2",
+      "type": 0,
+      "url": "https://jx.m3u8.tv/jiexi/?url="
+    },
+    {
+      "name": "解析3",
+      "type": 0,
+      "url": "https://t2.qlplayer.cyou/player/analysis.php?v="
+    },
+    {
+      "name": "解析4",
+      "type": 0,
+      "url": "shturl.cc/W8LzEZIqr6Bumwr2J9w3lgUqZC"
+    },
+    {
+      "name": "解析5",
+      "type": 0,
+      "url": "https://nm.xxxc137.top/static/player/artplayer.html?url="
+    },
+    {
+      "name": "解析6",
+      "type": 0,
+      "url": "https://www.yemu.xyz/?url="
+    },
+    {
+      "name": "冰豆",
+      "type": 0,
+      "url": "shturl.cc/PpA385DKeJEN"
+    },
+    {
+      "name": "爱酷",
+      "type": 0,
+      "url": "shturl.cc/m4LCKrehXPiMyUcjml40B"
+    },
+    {
+      "name": "云解析",
+      "type": 0,
+      "url": "https://jx.yparse.com/index.php?url=",
+      "ext": {
+        "header": {
+          "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
+        }
+      }
+    },
+    {
+      "name": "777",
+      "type": 0,
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ext": {
+        "header": {
+          "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
+        }
+      }
+    },
+    {
+      "name": "-剖云-",
+      "type": 0,
+      "url": "https://www.kkvip2022.com/vip/jiexi1/?url=",
+      "ext": {
+        "header": {
+          "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
+        }
+      }
+    },
+    {
+      "name": "-全看-",
+      "type": 0,
+      "url": "https://jx.quankan.app/?url=",
+      "ext": {
+        "header": {
+          "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
+        }
+      }
+    },
     {
       "name": "聚合",
       "type": 3,
@@ -115,34 +1027,14 @@
       "url": "shturl.cc/Py51otNiHUhmCSpmaecWLvRJQV"
     },
     {
-      "name": "解析1",
-      "type": 0,
-      "url": "https://huayong.net/999/?v="
-    },
-    {
       "name": "解析2",
       "type": 0,
       "url": "shturl.cc/YxanJJasPZu6Ii1EPXaM"
     },
     {
-      "name": "解析3",
-      "type": 0,
-      "url": "https://t2.qlplayer.cyou/player/analysis.php?v="
-    },
-    {
       "name": "解析4",
       "type": 0,
       "url": "shturl.cc/669b3z1qRQSBdTGW2W4WhlelTN"
-    },
-    {
-      "name": "解析5",
-      "type": 0,
-      "url": "https://nm.xxxc137.top/static/player/artplayer.html?url="
-    },
-    {
-      "name": "解析6",
-      "type": 0,
-      "url": "https://www.yemu.xyz/?url="
     },
     {
       "name": "解析7",
@@ -178,6 +1070,224 @@
           "user-agent": "Mozilla/5.0 (Linux; Android 13; V2049A Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/116.0.0.0 Mobile Safari/537.36"
         }
       }
+    }
+  ],
+  "doh": [
+    {
+      "name": "Google",
+      "url": "https://dns.google/dns-query",
+      "ips": [
+        "8.8.4.4",
+        "8.8.8.8"
+      ]
+    },
+    {
+      "name": "Cloudflare",
+      "url": "https://cloudflare-dns.com/dns-query",
+      "ips": [
+        "1.1.1.1",
+        "1.0.0.1",
+        "2606:4700:4700::1111",
+        "2606:4700:4700::1001"
+      ]
+    },
+    {
+      "name": "AdGuard",
+      "url": "https://dns.adguard.com/dns-query",
+      "ips": [
+        "94.140.14.140",
+        "94.140.14.141"
+      ]
+    },
+    {
+      "name": "DNSWatch",
+      "url": "https://resolver2.dns.watch/dns-query",
+      "ips": [
+        "84.200.69.80",
+        "84.200.70.40"
+      ]
+    },
+    {
+      "name": "Quad9",
+      "url": "https://dns.quad9.net/dns-query",
+      "ips": [
+        "9.9.9.9",
+        "149.112.112.112"
+      ]
+    }
+  ],
+  "ads": [
+    "mozai.4gtv.tv",
+    "static-mozai.4gtv.tv"
+  ],
+  "lives": [
+    {
+      "name": "咪咕直播",
+      "type": 0,
+      "ua": "okhttp/5.3.2",
+      "url": "http://www.52top.com.cn:678/downloads/migu.txt"
+    }
+  ],
+  "ijk": [
+    {
+      "group": "软解码",
+      "options": [
+        {
+          "category": 4,
+          "name": "opensles",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "overlay-format",
+          "value": "842225234"
+        },
+        {
+          "category": 4,
+          "name": "framedrop",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "soundtouch",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "start-on-prepared",
+          "value": "1"
+        },
+        {
+          "category": 1,
+          "name": "http-detect-range-support",
+          "value": "0"
+        },
+        {
+          "category": 1,
+          "name": "fflags",
+          "value": "fastseek"
+        },
+        {
+          "category": 2,
+          "name": "skip_loop_filter",
+          "value": "48"
+        },
+        {
+          "category": 4,
+          "name": "reconnect",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "enable-accurate-seek",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-auto-rotate",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-handle-resolution-change",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-hevc",
+          "value": "0"
+        },
+        {
+          "category": 1,
+          "name": "dns_cache_timeout",
+          "value": "600000000"
+        }
+      ]
+    },
+    {
+      "group": "硬解码",
+      "options": [
+        {
+          "category": 4,
+          "name": "opensles",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "overlay-format",
+          "value": "842225234"
+        },
+        {
+          "category": 4,
+          "name": "framedrop",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "soundtouch",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "start-on-prepared",
+          "value": "1"
+        },
+        {
+          "category": 1,
+          "name": "http-detect-range-support",
+          "value": "0"
+        },
+        {
+          "category": 1,
+          "name": "fflags",
+          "value": "fastseek"
+        },
+        {
+          "category": 2,
+          "name": "skip_loop_filter",
+          "value": "48"
+        },
+        {
+          "category": 4,
+          "name": "reconnect",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "enable-accurate-seek",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-auto-rotate",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-handle-resolution-change",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-hevc",
+          "value": "1"
+        },
+        {
+          "category": 1,
+          "name": "dns_cache_timeout",
+          "value": "600000000"
+        }
+      ]
     }
   ]
 }
