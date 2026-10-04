@@ -872,6 +872,15 @@
     },
     {
       "key": "cctv_py",
+      "name": "央视频[直播]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/央视频[直播].py"
+    },
+    {
+      "key": "cctv_py",
       "name": "央视网[直播]",
       "type": 3,
       "searchable": 1,
