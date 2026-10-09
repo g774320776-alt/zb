@@ -886,7 +886,12 @@
       "playerType": 2,
       "ua": "okhttp",
       "url": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/main/iptv.m3u"
-    }
+    },
+    {
+"api": "https://ghfast.top/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/yangshipin[直播].py",
+"ext": {},
+"name": "央视频"
+}
   ],
   "parses": [
     {
