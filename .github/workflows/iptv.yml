@@ -55,7 +55,7 @@ jobs:
       - name: Run iptv generate script
         if: env.ENABLED == 'true'
         run: |
-          python get_iptv.py
+          python 抓取.py
 
       - name: Check generated files
         if: env.ENABLED == 'true'
