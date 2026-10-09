@@ -818,24 +818,6 @@
       "api": "https://ghproxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/麦田影院[影视].py"
     },
     {
-      "key": "nmvm",
-      "name": "农民影视.py [影视]",
-      "type": 3,
-      "api": "https://ghproxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/农民影视[影视].py"
-    },
-    {
-      "key": "hstv",
-      "name": "华数TV.py [影视]",
-      "type": 3,
-      "api": "https://ghproxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/华数TV[影视].py"
-    },
-    {
-      "key": "MGtv",
-      "name": "芒果TV.py [影视]",
-      "type": 3,
-      "api": "https://ghproxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/芒果TV[影视].py"
-    },
-    {
       "key": "AQY",
       "name": "爱奇艺 [影视]",
       "type": 3,
@@ -864,8 +846,8 @@
       "ext": "https://cdn.waimaimingtang.com/file/images/bwc/20251023002144-0e40887294.js"
     },
     {
-      "key": "cctv_py",
-      "name": "央视频[影视]",
+      "key": "cctv_py_yangshipin",
+      "name": "央视频[直播]",
       "type": 3,
       "searchable": 1,
       "quickSearch": 1,
@@ -873,13 +855,22 @@
       "api": "https://ghproxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/央视频[直播].py"
     },
     {
-      "key": "cctv_py",
+      "key": "cctv_py_cctvwang",
       "name": "央视网[直播]",
       "type": 3,
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
       "api": "https://ghproxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/央视网[直播].py"
+    },
+    {
+      "key": "yangshipin[直播]_py",
+      "name": "yangshipin[直播]",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "api": "https://ghproxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/refs/heads/main/py/yangshipin[直播].py"
     }
   ],
   "lives": [
@@ -894,7 +885,7 @@
       "type": 0,
       "playerType": 2,
       "ua": "okhttp",
-      "url": "https://raw.githubusercontent.com/g774320776-alt/zb/main/iptv.txt"
+      "url": "https://ghproxy.com/https://raw.githubusercontent.com/g774320776-alt/zb/main/iptv.txt"
     }
   ],
   "parses": [
@@ -999,4 +990,3 @@
       }
     }
   ]
-}
